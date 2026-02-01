@@ -325,9 +325,11 @@
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;');
-      return escaped
+      escaped = escaped
         .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
         .replace(/\n/g, '<br>');
+      escaped = escaped.replace(/(<br>|^)([\-\*])\s+/g, '$1• ');
+      return escaped;
     }
 
     function autoResizeTextarea(el) {
