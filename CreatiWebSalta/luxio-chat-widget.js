@@ -321,7 +321,11 @@
 
     function formatMessage(text) {
       if (!text) return '';
-      var escaped = text
+      var t = text;
+      t = t.replace(/<br\s*\/?>/gi, '\n');
+      t = t.replace(/<\/strong>/gi, '**').replace(/<strong>/gi, '**');
+      t = t.replace(/<\/b>/gi, '**').replace(/<b>/gi, '**');
+      var escaped = t
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;');
