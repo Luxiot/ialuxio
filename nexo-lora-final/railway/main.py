@@ -1,14 +1,16 @@
 """
-API Luxio - Versión ligera para Railway (sin modelo LoRA).
-Usa solo respuestas predefinidas. Misma interfaz /api/chat que la versión completa.
+API Luxio - Versión ligera para Render/Railway.
+Si hay GROQ_API_KEY o OPENAI_API_KEY, usa ese servicio de IA.
+Si no, usa respuestas predefinidas. Misma interfaz /api/chat.
 """
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List, Optional
 import os
+import httpx
 
-app = FastAPI(title="Luxio API (Railway)", version="1.0.0")
+app = FastAPI(title="Luxio API", version="1.0.0")
 
 app.add_middleware(
     CORSMiddleware,
@@ -18,6 +20,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+GROQ_API_KEY = os.getenv("GROQ_API_KEY", "").strip()
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "").strip()
+
+SYSTEM_PROMPT = """Eres CreatiWeb AI, asistente de IA especializado en desarrollo web.
+Responde siempre en español, de forma clara y profesional.
+Ayudas con: proyectos web, presupuestos, tecnologías (HTML, CSS, JavaScript, React, etc.), buenas prácticas y consultas técnicas.
+Sé conciso pero útil. Usa formato cuando ayude (listas, negritas)."""
+
 class ChatRequest(BaseModel):
     message: str
     context: Optional[List[dict]] = []
@@ -25,82 +35,125 @@ class ChatRequest(BaseModel):
 class ChatResponse(BaseModel):
     response: str
     tokens_used: Optional[int] = None
+    source: Optional[str] = None  # "groq" | "openai" | "fallback" para depurar
+
+def _has_llm_key() -> bool:
+    return bool(GROQ_API_KEY or OPENAI_API_KEY)
 
 @app.get("/")
 async def root():
     return {
-        "message": "Luxio API está funcionando (modo ligero)",
-        "model_loaded": False,
-        "hosting": "Railway"
+        "message": "Luxio API está funcionando",
+        "model_loaded": _has_llm_key(),
+        "llm": "groq" if GROQ_API_KEY else ("openai" if OPENAI_API_KEY else "fallback"),
     }
 
 @app.get("/health")
 async def health():
-    return {"status": "healthy", "model_loaded": False}
+    return {"status": "healthy", "model_loaded": _has_llm_key()}
+
+async def _call_groq(user_message: str, context: List[dict]) -> Optional[str]:
+    if not GROQ_API_KEY:
+        return None
+    messages = [{"role": "system", "content": SYSTEM_PROMPT}]
+    for c in context[-4:]:
+        if isinstance(c, dict):
+            r = c.get("role") or "user"
+            content = c.get("content") or c.get("context") or ""
+            if content:
+                messages.append({"role": r if r in ("user", "assistant") else "user", "content": str(content)[:500]})
+    messages.append({"role": "user", "content": user_message})
+    async with httpx.AsyncClient(timeout=60.0) as client:
+        r = await client.post(
+            "https://api.groq.com/openai/v1/chat/completions",
+            headers={"Authorization": f"Bearer {GROQ_API_KEY}", "Content-Type": "application/json"},
+            json={
+                "model": "llama-3.1-8b-instant",
+                "messages": messages,
+                "max_tokens": 1024,
+                "temperature": 0.7,
+            },
+        )
+    if r.status_code != 200:
+        try:
+            print(f"[Groq] status={r.status_code} body={r.text[:500]}")
+        except Exception:
+            print(f"[Groq] status={r.status_code}")
+        return None
+    data = r.json()
+    if not data.get("choices"):
+        print("[Groq] respuesta sin choices")
+        return None
+    return (data["choices"][0].get("message") or {}).get("content", "").strip()
+
+async def _call_openai(user_message: str, context: List[dict]) -> Optional[str]:
+    if not OPENAI_API_KEY:
+        return None
+    messages = [{"role": "system", "content": SYSTEM_PROMPT}]
+    for c in context[-4:]:
+        if isinstance(c, dict):
+            r = c.get("role") or "user"
+            content = c.get("content") or c.get("context") or ""
+            if content:
+                messages.append({"role": r if r in ("user", "assistant") else "user", "content": str(content)[:500]})
+    messages.append({"role": "user", "content": user_message})
+    async with httpx.AsyncClient(timeout=60.0) as client:
+        r = await client.post(
+            "https://api.openai.com/v1/chat/completions",
+            headers={"Authorization": f"Bearer {OPENAI_API_KEY}", "Content-Type": "application/json"},
+            json={
+                "model": "gpt-3.5-turbo",
+                "messages": messages,
+                "max_tokens": 1024,
+            },
+        )
+    if r.status_code != 200:
+        return None
+    data = r.json()
+    if not data.get("choices"):
+        return None
+    return (data["choices"][0].get("message") or {}).get("content", "").strip()
+
+def generate_fallback_response(user_message: str, context: List[dict]) -> str:
+    message_lower = user_message.lower().strip()
+    if any(word in message_lower for word in ['hola', 'hi', 'buenos días', 'buenas tardes', 'buenas']):
+        return """Hola. Soy CreatiWeb AI, asistente de IA para desarrollo web.
+
+Puedo ayudarte con proyectos, presupuestos, tecnologías y buenas prácticas.
+
+**Configura una API key en Render** (GROQ_API_KEY o OPENAI_API_KEY) para respuestas con IA real. Sin clave, uso respuestas predefinidas."""
+    elif 'creador' in message_lower or 'creaste' in message_lower or 'quien te' in message_lower or 'quién te' in message_lower:
+        return """Soy CreatiWeb AI, integrado en la API Luxio. Puedo usar Groq u OpenAI si está configurada la API key en el servidor."""
+    elif 'como funciona' in message_lower or 'cómo funciona' in message_lower:
+        return """Esta API puede usar Groq u OpenAI para respuestas inteligentes. Configura GROQ_API_KEY o OPENAI_API_KEY en las variables de entorno de Render."""
+    elif 'que eres' in message_lower or 'qué eres' in message_lower:
+        return """Soy CreatiWeb AI: asistente de IA para desarrollo web. Responde desde la API en Render; con API key uso un modelo de lenguaje externo (Groq/OpenAI)."""
+    else:
+        return f"""Recibí: **"{user_message}"**
+
+Para respuestas con IA real, configura en Render la variable de entorno **GROQ_API_KEY** (gratis en groq.com) o **OPENAI_API_KEY**."""
 
 @app.post("/api/chat", response_model=ChatResponse)
 async def chat(request: ChatRequest):
     if not request.message or not request.message.strip():
         raise HTTPException(status_code=400, detail="El mensaje no puede estar vacío")
-    try:
-        response_text = generate_fallback_response(request.message, request.context or [])
-        return ChatResponse(response=response_text)
-    except Exception as e:
-        response_text = generate_fallback_response(request.message, request.context or [])
-        return ChatResponse(response=response_text)
+    ctx = request.context or []
+    user_message = request.message.strip()
 
-def generate_fallback_response(user_message: str, context: List[dict]) -> str:
-    message_lower = user_message.lower().strip()
-    if any(word in message_lower for word in ['hola', 'hi', 'buenos días', 'buenas tardes', 'buenas']):
-        return """¡Hola! Soy un asistente de IA diseñado para ayudarte de la mejor manera posible.
+    response_text = None
+    source = "fallback"
+    if GROQ_API_KEY:
+        response_text = await _call_groq(user_message, ctx)
+        if response_text:
+            source = "groq"
+    if (response_text is None or not response_text) and OPENAI_API_KEY:
+        response_text = await _call_openai(user_message, ctx)
+        if response_text:
+            source = "openai"
+    if response_text is None or not response_text:
+        response_text = generate_fallback_response(user_message, ctx)
 
-**¿Qué puedo hacer por ti?**
-- Responder preguntas sobre diversos temas
-- Ayudar con tareas y problemas
-- Proporcionar explicaciones detalladas
-- Mantener conversaciones útiles y constructivas
-
-Cada interacción me ayuda a mejorar. ¿En qué puedo asistirte hoy?"""
-    elif 'creador' in message_lower or 'creaste' in message_lower or 'quien te' in message_lower or 'quién te' in message_lower:
-        return """**Sobre mi creación:**
-
-Fui desarrollado usando una arquitectura de aprendizaje profundo avanzada:
-
-**Modelo Base:** Qwen2-1.5B-Instruct
-**Entrenamiento Personalizado:** LoRA (Low-Rank Adaptation)
-**Objetivo:** Proporcionar respuestas útiles, precisas y bien estructuradas."""
-    elif 'como funciona' in message_lower or 'cómo funciona' in message_lower:
-        return """**Cómo funciono:**
-
-Mi arquitectura se basa en tres componentes principales:
-
-**1. Modelo de Lenguaje Base**
-**2. Adaptador LoRA Personalizado**
-**3. Sistema de Memoria y Contexto**
-
-**Resultado:** Un asistente que combina la capacidad general del modelo base con conocimiento especializado."""
-    elif 'que aprendiste' in message_lower or 'qué aprendiste' in message_lower:
-        context_count = len(context) if context else 0
-        return f"""**Estado de mi aprendizaje:**
-
-He procesado {context_count} interacciones recientes.
-Cada conversación fortalece mi comprensión. ¿En qué puedo ayudarte?"""
-    elif 'que eres' in message_lower or 'qué eres' in message_lower:
-        return """**Soy un asistente de IA avanzado**
-
-**Mi propósito:** Ayudarte de la manera más útil, honesta e inofensiva posible.
-**Mis características:** Útil, Honesto, Inofensivo, Adaptable."""
-    else:
-        return f"""Entiendo que preguntaste sobre: **"{user_message}"**
-
-**Mi análisis:**
-Estoy procesando tu pregunta. Para darte la mejor respuesta posible:
-
-1. **Más contexto:** ¿Podrías proporcionar más detalles?
-2. **Reformulación:** A veces reformular la pregunta ayuda
-3. **Especificidad:** Cuanto más específica sea tu pregunta, más precisa será mi respuesta
-
-¿En qué puedo ayudarte mejor?"""
+    return ChatResponse(response=response_text, source=source)
 
 if __name__ == "__main__":
     import uvicorn
