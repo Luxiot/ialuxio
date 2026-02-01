@@ -23,6 +23,11 @@ app.add_middleware(
 GROQ_API_KEY = os.getenv("GROQ_API_KEY", "").strip()
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "").strip()
 
+# Log al arranque para depurar en Render (no muestra el valor de la clave)
+print(f"[Luxio API] GROQ_API_KEY configurada: {bool(GROQ_API_KEY)}")
+print(f"[Luxio API] OPENAI_API_KEY configurada: {bool(OPENAI_API_KEY)}")
+print(f"[Luxio API] Modo: {'groq' if GROQ_API_KEY else ('openai' if OPENAI_API_KEY else 'fallback')}")
+
 SYSTEM_PROMPT = """Eres CreatiWeb AI, asistente de IA especializado en desarrollo web.
 Responde siempre en español, de forma clara y profesional.
 Ayudas con: proyectos web, presupuestos, tecnologías (HTML, CSS, JavaScript, React, etc.), buenas prácticas y consultas técnicas.
