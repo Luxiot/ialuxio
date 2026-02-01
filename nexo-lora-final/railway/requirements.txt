@@ -1,4 +1,5 @@
-# API ligera para Railway (sin modelo pesado)
+# API ligera para Railway/Render (con Groq u OpenAI opcional)
+# Sin httpx: usamos urllib de la stdlib para evitar problemas de build en Render
 fastapi>=0.115.0
 uvicorn[standard]>=0.32.0
 pydantic>=2.10.0
