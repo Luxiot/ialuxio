@@ -173,7 +173,7 @@ async def _call_gemini(user_message: str, context: List[dict]) -> Optional[str]:
         "contents": contents,
         "generationConfig": {"maxOutputTokens": 1024, "temperature": 0.7},
     }
-    url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent"
+    url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent"
     headers = {"x-goog-api-key": GEMINI_API_KEY, "Content-Type": "application/json"}
     loop = asyncio.get_event_loop()
     status, raw = await loop.run_in_executor(None, lambda: _http_post_sync(url, headers, body))
