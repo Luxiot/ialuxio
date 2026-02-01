@@ -48,9 +48,9 @@
       max-width: calc(100vw - 48px);
       height: 520px;
       max-height: calc(100vh - 140px);
-      background: white;
+      background: linear-gradient(180deg, #fafbfc 0%, #f0f2f5 100%);
       border-radius: 16px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+      box-shadow: 0 12px 48px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.06);
       flex-direction: column;
       overflow: hidden;
     }
@@ -83,37 +83,45 @@
     .luxio-widget-messages {
       flex: 1;
       overflow-y: auto;
-      padding: 16px;
-      background: #f8f9fa;
+      padding: 20px;
+      background: #f0f2f5;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 14px;
     }
     .luxio-msg {
       max-width: 85%;
-      padding: 12px 16px;
+      padding: 14px 18px;
       border-radius: 16px;
       font-size: 14px;
-      line-height: 1.5;
+      line-height: 1.55;
       word-wrap: break-word;
+      color: #1f2937;
     }
     .luxio-msg.user {
       align-self: flex-end;
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: white;
       border-bottom-right-radius: 4px;
+      box-shadow: 0 2px 8px rgba(102, 126, 234, 0.25);
     }
     .luxio-msg.assistant {
       align-self: flex-start;
-      background: white;
-      border: 1px solid #e9ecef;
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
       border-bottom-left-radius: 4px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      color: #374151;
+    }
+    .luxio-msg.assistant strong {
+      color: #1f2937;
     }
     .luxio-msg.assistant pre, .luxio-msg.assistant code {
-      background: #f1f3f5;
-      padding: 2px 6px;
-      border-radius: 4px;
+      background: #f3f4f6;
+      padding: 4px 8px;
+      border-radius: 6px;
       font-size: 13px;
+      color: #4b5563;
     }
     .luxio-typing {
       display: flex;
@@ -136,8 +144,9 @@
     }
     .luxio-widget-input-area {
       padding: 16px;
-      background: white;
-      border-top: 1px solid #e9ecef;
+      background: #ffffff;
+      border-top: 1px solid #e5e7eb;
+      box-shadow: 0 -2px 8px rgba(0,0,0,0.04);
     }
     .luxio-widget-input-wrap {
       display: flex;
@@ -182,7 +191,7 @@
     }
   `;
 
-  const welcomeMessage = `¡Hola! Soy ${BOT_NAME} 🧠\n\nSoy un asistente de IA especializado en desarrollo web. Puedo ayudarte con consultas sobre tu proyecto, presupuestos, tecnologías y más. ¿En qué puedo asistirte hoy?`;
+  const welcomeMessage = `Hola, soy ${BOT_NAME}.\n\nAsistente comercial de CreatiWebSalta. Desarrollo web profesional en Salta: sitios corporativos, e-commerce, landing pages. Presupuestos desde $150.000.\n\n¿Querés saber cuánto sale tu proyecto o qué incluye?`;
 
   function createWidget() {
     const container = document.createElement('div');
@@ -198,7 +207,7 @@
         <div class="luxio-widget-header">
           <div>
             <h3>${BOT_NAME}</h3>
-            <p>Asistente IA • Conversación inteligente</p>
+            <p>Desarrollo web profesional • Presupuestos sin compromiso</p>
           </div>
         </div>
         <div class="luxio-widget-messages"></div>
@@ -265,7 +274,8 @@
           body: JSON.stringify({
             message: text,
             context: conversationHistory.slice(-6)
-          })
+          }),
+          cache: 'no-store'
         });
 
         typingEl.remove();
@@ -310,10 +320,12 @@
     }
 
     function formatMessage(text) {
-      return text
+      if (!text) return '';
+      var escaped = text
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
+        .replace(/>/g, '&gt;');
+      return escaped
         .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
         .replace(/\n/g, '<br>');
     }
