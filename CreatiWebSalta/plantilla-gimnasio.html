@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerFit Gym - Plantilla de Ejemplo</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1e1e1e;
+            --secondary-color: #ff6b35;
+            --accent-color: #f7931e;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --white: #ffffff;
+            --gray-light: #f8f8f8;
+            --dark-gray: #2a2a2a;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--white);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(30, 30, 30, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--secondary-color);
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            color: var(--white);
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1rem;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--secondary-color);
+            font-weight: 300;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 18px 40px;
+            border: none;
+            border-radius: 0;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: var(--secondary-color);
+            color: var(--white);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 3px solid var(--white);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Classes Section */
+        .classes {
+            background: var(--gray-light);
+        }
+
+        .classes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .class-card {
+            background: var(--white);
+            border-radius: 0;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .class-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .class-image {
+            height: 200px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 3rem;
+            position: relative;
+        }
+
+        .class-time {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--secondary-color);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        .class-content {
+            padding: 2rem;
+        }
+
+        .class-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+
+        .class-description {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .class-features {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-tag {
+            background: var(--gray-light);
+            color: var(--text-dark);
+            padding: 0.5rem 1rem;
+            border-radius: 0;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .join-btn {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 12px 30px;
+            border: none;
+            border-radius: 0;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            width: 100%;
+        }
+
+        .join-btn:hover {
+            background: var(--secondary-color);
+        }
+
+        /* Trainers Section */
+        .trainers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .trainer-card {
+            text-align: center;
+            background: var(--white);
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .trainer-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .trainer-image {
+            height: 250px;
+            background: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 4rem;
+        }
+
+        .trainer-info {
+            padding: 2rem;
+        }
+
+        .trainer-name {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+
+        .trainer-specialty {
+            color: var(--secondary-color);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .trainer-description {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .trainer-social {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .trainer-social a {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        .trainer-social a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Membership Section */
+        .membership {
+            background: var(--dark-gray);
+            color: var(--white);
+        }
+
+        .membership-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .membership-card {
+            background: var(--white);
+            color: var(--text-dark);
+            border-radius: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .membership-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .membership-card.featured {
+            border: 3px solid var(--secondary-color);
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--secondary-color);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .membership-header {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .membership-name {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .membership-price {
+            font-size: 3rem;
+            color: var(--secondary-color);
+            font-weight: 900;
+        }
+
+        .membership-period {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .membership-features {
+            padding: 2rem;
+        }
+
+        .membership-features ul {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .membership-features li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .membership-features li:before {
+            content: '✓';
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+
+        .membership-btn {
+            background: var(--secondary-color);
+            color: var(--white);
+            padding: 15px 30px;
+            border: none;
+            border-radius: 0;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            width: 100%;
+        }
+
+        .membership-btn:hover {
+            background: var(--primary-color);
+        }
+
+        /* Schedule Section */
+        .schedule {
+            background: var(--gray-light);
+        }
+
+        .schedule-table {
+            background: var(--white);
+            border-radius: 0;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-top: 3rem;
+        }
+
+        .schedule-header {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .schedule-header h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+        }
+
+        .schedule-day {
+            background: var(--white);
+            border: 1px solid #e0e0e0;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .schedule-day:nth-child(odd) {
+            background: var(--gray-light);
+        }
+
+        .day-name {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .class-schedule {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            line-height: 1.4;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-form {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--white);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 0;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            background: var(--secondary-color);
+            color: var(--white);
+            padding: 15px 40px;
+            border: none;
+            border-radius: 0;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .submit-btn:hover {
+            background: var(--accent-color);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: var(--text-light);
+            text-decoration: none;
+            line-height: 1.6;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            color: var(--white);
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .classes-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .trainers-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .membership-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .schedule-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">POWERFIT</div>
+            <ul class="nav-links">
+                <li><a href="#home">Inicio</a></li>
+                <li><a href="#classes">Clases</a></li>
+                <li><a href="#trainers">Entrenadores</a></li>
+                <li><a href="#membership">Membresías</a></li>
+                <li><a href="#schedule">Horarios</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content container">
+            <h1>Transforma tu Vida</h1>
+            <p class="hero-subtitle">El mejor gimnasio de la ciudad</p>
+            <p class="hero-description">
+                Únete a PowerFit y alcanza tus objetivos fitness con entrenadores 
+                profesionales, equipos de última generación y un ambiente motivador.
+            </p>
+            <div class="cta-buttons">
+                <a href="#membership" class="btn btn-primary">Únete Ahora</a>
+                <a href="#classes" class="btn btn-secondary">Ver Clases</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Classes Section -->
+    <section id="classes" class="classes">
+        <div class="container">
+            <h2 class="section-title">Nuestras Clases</h2>
+            <p class="section-subtitle">
+                Ofrecemos una amplia variedad de clases para todos los niveles 
+                y objetivos fitness.
+            </p>
+            <div class="classes-grid">
+                <!-- Class 1 -->
+                <div class="class-card">
+                    <div class="class-image">
+                        <i class="fas fa-dumbbell"></i>
+                        <div class="class-time">6:00 AM</div>
+                    </div>
+                    <div class="class-content">
+                        <h3 class="class-title">CrossFit</h3>
+                        <p class="class-description">
+                            Entrenamiento funcional de alta intensidad que combina 
+                            fuerza, resistencia y agilidad para resultados máximos.
+                        </p>
+                        <div class="class-features">
+                            <span class="feature-tag">Alta Intensidad</span>
+                            <span class="feature-tag">Funcional</span>
+                            <span class="feature-tag">Quema Calorías</span>
+                        </div>
+                        <button class="join-btn">Unirse a la Clase</button>
+                    </div>
+                </div>
+
+                <!-- Class 2 -->
+                <div class="class-card">
+                    <div class="class-image">
+                        <i class="fas fa-yoga"></i>
+                        <div class="class-time">7:30 AM</div>
+                    </div>
+                    <div class="class-content">
+                        <h3 class="class-title">Yoga Flow</h3>
+                        <p class="class-description">
+                            Clase de yoga dinámico que mejora la flexibilidad, 
+                            equilibrio y reduce el estrés con movimientos fluidos.
+                        </p>
+                        <div class="class-features">
+                            <span class="feature-tag">Flexibilidad</span>
+                            <span class="feature-tag">Relajación</span>
+                            <span class="feature-tag">Todos los Niveles</span>
+                        </div>
+                        <button class="join-btn">Unirse a la Clase</button>
+                    </div>
+                </div>
+
+                <!-- Class 3 -->
+                <div class="class-card">
+                    <div class="class-image">
+                        <i class="fas fa-running"></i>
+                        <div class="class-time">6:00 PM</div>
+                    </div>
+                    <div class="class-content">
+                        <h3 class="class-title">Spinning</h3>
+                        <p class="class-description">
+                            Entrenamiento cardiovascular intenso en bicicleta 
+                            estática con música motivadora y diferentes niveles.
+                        </p>
+                        <div class="class-features">
+                            <span class="feature-tag">Cardio</span>
+                            <span class="feature-tag">Música</span>
+                            <span class="feature-tag">Quema Grasa</span>
+                        </div>
+                        <button class="join-btn">Unirse a la Clase</button>
+                    </div>
+                </div>
+
+                <!-- Class 4 -->
+                <div class="class-card">
+                    <div class="class-image">
+                        <i class="fas fa-fist-raised"></i>
+                        <div class="class-time">7:00 PM</div>
+                    </div>
+                    <div class="class-content">
+                        <h3 class="class-title">Kickboxing</h3>
+                        <p class="class-description">
+                            Combina técnicas de boxeo y artes marciales para 
+                            un entrenamiento completo de fuerza y cardio.
+                        </p>
+                        <div class="class-features">
+                            <span class="feature-tag">Artes Marciales</span>
+                            <span class="feature-tag">Defensa Personal</span>
+                            <span class="feature-tag">Alta Energía</span>
+                        </div>
+                        <button class="join-btn">Unirse a la Clase</button>
+                    </div>
+                </div>
+
+                <!-- Class 5 -->
+                <div class="class-card">
+                    <div class="class-image">
+                        <i class="fas fa-heart"></i>
+                        <div class="class-time">8:00 AM</div>
+                    </div>
+                    <div class="class-content">
+                        <h3 class="class-title">Zumba</h3>
+                        <p class="class-description">
+                            Baila y quema calorías con esta clase divertida que 
+                            combina ritmos latinos con ejercicios aeróbicos.
+                        </p>
+                        <div class="class-features">
+                            <span class="feature-tag">Baile</span>
+                            <span class="feature-tag">Diversión</span>
+                            <span class="feature-tag">Cardio</span>
+                        </div>
+                        <button class="join-btn">Unirse a la Clase</button>
+                    </div>
+                </div>
+
+                <!-- Class 6 -->
+                <div class="class-card">
+                    <div class="class-image">
+                        <i class="fas fa-dumbbell"></i>
+                        <div class="class-time">5:30 PM</div>
+                    </div>
+                    <div class="class-content">
+                        <h3 class="class-title">Body Pump</h3>
+                        <p class="class-description">
+                            Entrenamiento de fuerza con barras y pesas que 
+                            tonifica todo el cuerpo con música motivadora.
+                        </p>
+                        <div class="class-features">
+                            <span class="feature-tag">Fuerza</span>
+                            <span class="feature-tag">Tonicación</span>
+                            <span class="feature-tag">Música</span>
+                        </div>
+                        <button class="join-btn">Unirse a la Clase</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trainers Section -->
+    <section id="trainers">
+        <div class="container">
+            <h2 class="section-title">Nuestros Entrenadores</h2>
+            <p class="section-subtitle">
+                Conoce a nuestro equipo de entrenadores certificados y 
+                experimentados que te ayudarán a alcanzar tus objetivos.
+            </p>
+            <div class="trainers-grid">
+                <div class="trainer-card">
+                    <div class="trainer-image">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="trainer-info">
+                        <h3 class="trainer-name">Carlos Rodríguez</h3>
+                        <p class="trainer-specialty">Entrenador de Fuerza</p>
+                        <p class="trainer-description">
+                            Especialista en entrenamiento de fuerza y musculación 
+                            con más de 8 años de experiencia.
+                        </p>
+                        <div class="trainer-social">
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="trainer-card">
+                    <div class="trainer-image">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="trainer-info">
+                        <h3 class="trainer-name">Ana Martínez</h3>
+                        <p class="trainer-specialty">Instructora de Yoga</p>
+                        <p class="trainer-description">
+                            Instructora certificada de yoga con especialización 
+                            en Vinyasa y Power Yoga.
+                        </p>
+                        <div class="trainer-social">
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="trainer-card">
+                    <div class="trainer-image">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="trainer-info">
+                        <h3 class="trainer-name">Miguel Torres</h3>
+                        <p class="trainer-specialty">Entrenador de CrossFit</p>
+                        <p class="trainer-description">
+                            Entrenador certificado de CrossFit Level 2 con 
+                            experiencia en competiciones nacionales.
+                        </p>
+                        <div class="trainer-social">
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Membership Section -->
+    <section id="membership" class="membership">
+        <div class="container">
+            <h2 class="section-title">Planes de Membresía</h2>
+            <p class="section-subtitle">
+                Elige el plan que mejor se adapte a tus necesidades y 
+                comienza tu transformación fitness hoy mismo.
+            </p>
+            <div class="membership-grid">
+                <!-- Basic Plan -->
+                <div class="membership-card">
+                    <div class="membership-header">
+                        <h3 class="membership-name">Plan Básico</h3>
+                        <div class="membership-price">$29</div>
+                        <div class="membership-period">por mes</div>
+                    </div>
+                    <div class="membership-features">
+                        <ul>
+                            <li>Acceso al gimnasio</li>
+                            <li>Equipos básicos</li>
+                            <li>Locker room</li>
+                            <li>WiFi gratuito</li>
+                        </ul>
+                        <button class="membership-btn">Elegir Plan</button>
+                    </div>
+                </div>
+
+                <!-- Premium Plan -->
+                <div class="membership-card featured">
+                    <div class="featured-badge">Popular</div>
+                    <div class="membership-header">
+                        <h3 class="membership-name">Plan Premium</h3>
+                        <div class="membership-price">$59</div>
+                        <div class="membership-period">por mes</div>
+                    </div>
+                    <div class="membership-features">
+                        <ul>
+                            <li>Todo del Plan Básico</li>
+                            <li>Clases grupales ilimitadas</li>
+                            <li>Entrenador personal (1 sesión/mes)</li>
+                            <li>Acceso a piscina y sauna</li>
+                            <li>Evaluación física gratuita</li>
+                        </ul>
+                        <button class="membership-btn">Elegir Plan</button>
+                    </div>
+                </div>
+
+                <!-- Elite Plan -->
+                <div class="membership-card">
+                    <div class="membership-header">
+                        <h3 class="membership-name">Plan Elite</h3>
+                        <div class="membership-price">$99</div>
+                        <div class="membership-period">por mes</div>
+                    </div>
+                    <div class="membership-features">
+                        <ul>
+                            <li>Todo del Plan Premium</li>
+                            <li>Entrenador personal (4 sesiones/mes)</li>
+                            <li>Nutricionista consulta mensual</li>
+                            <li>Acceso a todas las instalaciones</li>
+                            <li>Sin contratos de largo plazo</li>
+                        </ul>
+                        <button class="membership-btn">Elegir Plan</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Schedule Section -->
+    <section id="schedule" class="schedule">
+        <div class="container">
+            <h2 class="section-title">Horarios de Clases</h2>
+            <p class="section-subtitle">
+                Consulta nuestros horarios semanales y encuentra la clase 
+                perfecta para tu agenda.
+            </p>
+            <div class="schedule-table">
+                <div class="schedule-header">
+                    <h3>Horario Semanal</h3>
+                </div>
+                <div class="schedule-grid">
+                    <div class="schedule-day">
+                        <div class="day-name">Lunes</div>
+                        <div class="class-schedule">
+                            6:00 AM - CrossFit<br>
+                            7:30 AM - Yoga<br>
+                            6:00 PM - Spinning<br>
+                            7:00 PM - Kickboxing
+                        </div>
+                    </div>
+                    <div class="schedule-day">
+                        <div class="day-name">Martes</div>
+                        <div class="class-schedule">
+                            6:00 AM - Body Pump<br>
+                            7:30 AM - Zumba<br>
+                            6:00 PM - CrossFit<br>
+                            7:00 PM - Yoga
+                        </div>
+                    </div>
+                    <div class="schedule-day">
+                        <div class="day-name">Miércoles</div>
+                        <div class="class-schedule">
+                            6:00 AM - Spinning<br>
+                            7:30 AM - Body Pump<br>
+                            6:00 PM - Kickboxing<br>
+                            7:00 PM - Zumba
+                        </div>
+                    </div>
+                    <div class="schedule-day">
+                        <div class="day-name">Jueves</div>
+                        <div class="class-schedule">
+                            6:00 AM - CrossFit<br>
+                            7:30 AM - Yoga<br>
+                            6:00 PM - Body Pump<br>
+                            7:00 PM - Spinning
+                        </div>
+                    </div>
+                    <div class="schedule-day">
+                        <div class="day-name">Viernes</div>
+                        <div class="class-schedule">
+                            6:00 AM - Kickboxing<br>
+                            7:30 AM - CrossFit<br>
+                            6:00 PM - Zumba<br>
+                            7:00 PM - Body Pump
+                        </div>
+                    </div>
+                    <div class="schedule-day">
+                        <div class="day-name">Sábado</div>
+                        <div class="class-schedule">
+                            8:00 AM - Yoga<br>
+                            9:00 AM - CrossFit<br>
+                            10:00 AM - Zumba<br>
+                            11:00 AM - Spinning
+                        </div>
+                    </div>
+                    <div class="schedule-day">
+                        <div class="day-name">Domingo</div>
+                        <div class="class-schedule">
+                            9:00 AM - Yoga<br>
+                            10:00 AM - Body Pump<br>
+                            11:00 AM - CrossFit<br>
+                            Cerrado por la tarde
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Únete a PowerFit</h2>
+            <div class="contact-content">
+                <p style="margin-bottom: 3rem; font-size: 1.1rem; opacity: 0.9;">
+                    Completa el formulario para comenzar tu membresía o contactarnos 
+                    para cualquier consulta sobre nuestros servicios.
+                </p>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Nombre Completo</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Teléfono</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="membership-type">Tipo de Membresía</label>
+                        <select id="membership-type" name="membership-type" required>
+                            <option value="">Selecciona una opción</option>
+                            <option value="basic">Plan Básico</option>
+                            <option value="premium">Plan Premium</option>
+                            <option value="elite">Plan Elite</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="start-date">Fecha de Inicio</label>
+                        <input type="date" id="start-date" name="start-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="goals">Objetivos Fitness</label>
+                        <textarea id="goals" name="goals" placeholder="Cuéntanos sobre tus objetivos fitness..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Comenzar Membresía</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>PowerFit Gym</h3>
+                    <p>
+                        Tu gimnasio de confianza para alcanzar tus objetivos fitness. 
+                        Ofrecemos equipos de última generación, entrenadores 
+                        certificados y un ambiente motivador.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h3>Horarios</h3>
+                    <p>Lunes a Viernes: 5:00 AM - 11:00 PM</p>
+                    <p>Sábado: 6:00 AM - 8:00 PM</p>
+                    <p>Domingo: 7:00 AM - 6:00 PM</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <p>📍 Calle Fitness 456, Ciudad</p>
+                    <p>📞 +1 (555) 987-6543</p>
+                    <p>✉️ info@powerfitgym.com</p>
+                </div>
+            </div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p>&copy; 2024 PowerFit Gym. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+</body>
+</html>
+

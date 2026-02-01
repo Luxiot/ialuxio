@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerFit Gym - Transforma Tu Cuerpo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #000000, #1a1a1a);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #FF6B35;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #FF6B35;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 80px;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            color: #FF6B35;
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+        }
+
+        .cta-button {
+            background: #FF6B35;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            margin: 0 1rem;
+        }
+
+        .cta-button:hover {
+            background: #E55A2B;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255,107,53,0.4);
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            border: 2px solid #FF6B35;
+        }
+
+        .cta-button.secondary:hover {
+            background: #FF6B35;
+        }
+
+        /* Sections */
+        .section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section h2 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            color: #000000;
+            position: relative;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: #FF6B35;
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            text-align: center;
+            border-top: 5px solid #FF6B35;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .service-card i {
+            font-size: 3rem;
+            color: #FF6B35;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            color: #000000;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .service-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Membership Plans */
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .plan-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .plan-card.featured {
+            border: 3px solid #FF6B35;
+            transform: scale(1.05);
+        }
+
+        .plan-card.featured::before {
+            content: 'MÁS POPULAR';
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: #FF6B35;
+            color: white;
+            padding: 5px 40px;
+            transform: rotate(45deg);
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .plan-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .plan-card.featured:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+
+        .plan-card h3 {
+            color: #000000;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .plan-card .price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #FF6B35;
+            margin-bottom: 1rem;
+        }
+
+        .plan-card .price span {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .plan-card ul {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .plan-card li {
+            padding: 0.5rem 0;
+            color: #666;
+            border-bottom: 1px solid #eee;
+        }
+
+        .plan-card li:last-child {
+            border-bottom: none;
+        }
+
+        .plan-card .check {
+            color: #28a745;
+            margin-right: 0.5rem;
+        }
+
+        .plan-btn {
+            background: #FF6B35;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .plan-btn:hover {
+            background: #E55A2B;
+            transform: translateY(-2px);
+        }
+
+        /* Trainers Section */
+        .trainers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .trainer-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .trainer-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .trainer-image {
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .trainer-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .trainer-card:hover .trainer-image img {
+            transform: scale(1.1);
+        }
+
+        .trainer-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .trainer-info h3 {
+            color: #000000;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .trainer-info p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .trainer-specialties {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .specialty-tag {
+            background: #FF6B35;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+
+        /* Schedule Section */
+        .schedule-container {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-top: 3rem;
+            overflow-x: auto;
+        }
+
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .schedule-table th,
+        .schedule-table td {
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .schedule-table th {
+            background: #FF6B35;
+            color: white;
+            font-weight: bold;
+        }
+
+        .schedule-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .class-name {
+            font-weight: bold;
+            color: #FF6B35;
+        }
+
+        .time-slot {
+            font-weight: bold;
+            color: #000000;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .contact-info h3 {
+            color: #000000;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .contact-info p {
+            margin-bottom: 1rem;
+            color: #666;
+        }
+
+        .contact-info i {
+            color: #FF6B35;
+            margin-right: 1rem;
+            width: 20px;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #000000;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #FF6B35;
+        }
+
+        .submit-btn {
+            background: #FF6B35;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background: #E55A2B;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .footer {
+            background: #000000;
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 5rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer h3 {
+            color: #FF6B35;
+            margin-bottom: 1rem;
+        }
+
+        .footer p {
+            margin-bottom: 1rem;
+            color: #ccc;
+        }
+
+        .social-links {
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            color: #FF6B35;
+            font-size: 1.5rem;
+            margin: 0 1rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: white;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+
+            .hero-content .cta-button {
+                display: block;
+                margin: 1rem auto;
+                width: 200px;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .section {
+                padding: 3rem 1rem;
+            }
+
+            .schedule-container {
+                padding: 1rem;
+            }
+
+            .schedule-table th,
+            .schedule-table td {
+                padding: 0.5rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">💪 PowerFit Gym</div>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#planes">Planes</a></li>
+                <li><a href="#entrenadores">Entrenadores</a></li>
+                <li><a href="#horarios">Horarios</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="hero-content fade-in-up">
+            <h1>PowerFit Gym</h1>
+            <p>Transforma tu cuerpo, transforma tu vida</p>
+            <div>
+                <a href="#planes" class="cta-button">Únete Ahora</a>
+                <a href="#contacto" class="cta-button secondary">Consulta Gratis</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicios" class="section">
+        <h2>Nuestros Servicios</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <i class="fas fa-dumbbell"></i>
+                <h3>Entrenamiento Personalizado</h3>
+                <p>Programas de entrenamiento diseñados específicamente para tus objetivos y nivel de condición física.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-users"></i>
+                <h3>Clases Grupales</h3>
+                <p>Zumba, Spinning, Yoga, Pilates, CrossFit y más. Siempre hay una clase perfecta para ti.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-heart"></i>
+                <h3>Asesoría Nutricional</h3>
+                <p>Planes de alimentación personalizados para complementar tu entrenamiento y alcanzar tus metas.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-running"></i>
+                <h3>Cardio Avanzado</h3>
+                <p>Equipos de última generación para entrenamiento cardiovascular efectivo y entretenido.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-swimming-pool"></i>
+                <h3>Piscina y Spa</h3>
+                <p>Relájate después del entrenamiento en nuestra piscina climatizada y área de spa.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-child"></i>
+                <h3>Programa Infantil</h3>
+                <p>Actividades físicas divertidas y educativas para niños de todas las edades.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Membership Plans Section -->
+    <section id="planes" class="section">
+        <h2>Planes de Membresía</h2>
+        <div class="plans-grid">
+            <div class="plan-card">
+                <h3>Básico</h3>
+                <div class="price">$29<span>/mes</span></div>
+                <ul>
+                    <li><i class="fas fa-check check"></i>Acceso al gimnasio</li>
+                    <li><i class="fas fa-check check"></i>Equipos básicos</li>
+                    <li><i class="fas fa-check check"></i>Vestidores</li>
+                    <li><i class="fas fa-check check"></i>Estacionamiento</li>
+                </ul>
+                <button class="plan-btn">Elegir Plan</button>
+            </div>
+            
+            <div class="plan-card featured">
+                <h3>Premium</h3>
+                <div class="price">$49<span>/mes</span></div>
+                <ul>
+                    <li><i class="fas fa-check check"></i>Todo del plan Básico</li>
+                    <li><i class="fas fa-check check"></i>Clases grupales ilimitadas</li>
+                    <li><i class="fas fa-check check"></i>Piscina y spa</li>
+                    <li><i class="fas fa-check check"></i>Entrenador personal (1 sesión/mes)</li>
+                    <li><i class="fas fa-check check"></i>Asesoría nutricional</li>
+                </ul>
+                <button class="plan-btn">Elegir Plan</button>
+            </div>
+            
+            <div class="plan-card">
+                <h3>Elite</h3>
+                <div class="price">$79<span>/mes</span></div>
+                <ul>
+                    <li><i class="fas fa-check check"></i>Todo del plan Premium</li>
+                    <li><i class="fas fa-check check"></i>Entrenador personal (4 sesiones/mes)</li>
+                    <li><i class="fas fa-check check"></i>Plan nutricional personalizado</li>
+                    <li><i class="fas fa-check check"></i>Acceso 24/7</li>
+                    <li><i class="fas fa-check check"></i>Invitado gratis</li>
+                </ul>
+                <button class="plan-btn">Elegir Plan</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trainers Section -->
+    <section id="entrenadores" class="section">
+        <h2>Nuestros Entrenadores</h2>
+        <div class="trainers-grid">
+            <div class="trainer-card">
+                <div class="trainer-image">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Entrenador 1">
+                </div>
+                <div class="trainer-info">
+                    <h3>Carlos Rodríguez</h3>
+                    <p>Especialista en fuerza y acondicionamiento</p>
+                    <div class="trainer-specialties">
+                        <span class="specialty-tag">Fuerza</span>
+                        <span class="specialty-tag">CrossFit</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="trainer-card">
+                <div class="trainer-image">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Entrenadora 2">
+                </div>
+                <div class="trainer-info">
+                    <h3>Ana Martínez</h3>
+                    <p>Instructora de yoga y pilates</p>
+                    <div class="trainer-specialties">
+                        <span class="specialty-tag">Yoga</span>
+                        <span class="specialty-tag">Pilates</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="trainer-card">
+                <div class="trainer-image">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Entrenador 3">
+                </div>
+                <div class="trainer-info">
+                    <h3>Miguel Torres</h3>
+                    <p>Especialista en cardio y pérdida de peso</p>
+                    <div class="trainer-specialties">
+                        <span class="specialty-tag">Cardio</span>
+                        <span class="specialty-tag">Pérdida de peso</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="trainer-card">
+                <div class="trainer-image">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Entrenadora 4">
+                </div>
+                <div class="trainer-info">
+                    <h3>Laura Sánchez</h3>
+                    <p>Instructora de zumba y baile</p>
+                    <div class="trainer-specialties">
+                        <span class="specialty-tag">Zumba</span>
+                        <span class="specialty-tag">Baile</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Schedule Section -->
+    <section id="horarios" class="section">
+        <h2>Horarios de Clases</h2>
+        <div class="schedule-container">
+            <table class="schedule-table">
+                <thead>
+                    <tr>
+                        <th>Hora</th>
+                        <th>Lunes</th>
+                        <th>Martes</th>
+                        <th>Miércoles</th>
+                        <th>Jueves</th>
+                        <th>Viernes</th>
+                        <th>Sábado</th>
+                        <th>Domingo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="time-slot">06:00</td>
+                        <td class="class-name">Spinning</td>
+                        <td class="class-name">Yoga</td>
+                        <td class="class-name">CrossFit</td>
+                        <td class="class-name">Pilates</td>
+                        <td class="class-name">Zumba</td>
+                        <td class="class-name">Spinning</td>
+                        <td class="class-name">Yoga</td>
+                    </tr>
+                    <tr>
+                        <td class="time-slot">07:00</td>
+                        <td class="class-name">CrossFit</td>
+                        <td class="class-name">Spinning</td>
+                        <td class="class-name">Yoga</td>
+                        <td class="class-name">Zumba</td>
+                        <td class="class-name">Pilates</td>
+                        <td class="class-name">CrossFit</td>
+                        <td class="class-name">Spinning</td>
+                    </tr>
+                    <tr>
+                        <td class="time-slot">08:00</td>
+                        <td class="class-name">Yoga</td>
+                        <td class="class-name">Pilates</td>
+                        <td class="class-name">Spinning</td>
+                        <td class="class-name">CrossFit</td>
+                        <td class="class-name">Yoga</td>
+                        <td class="class-name">Zumba</td>
+                        <td class="class-name">Pilates</td>
+                    </tr>
+                    <tr>
+                        <td class="time-slot">18:00</td>
+                        <td class="class-name">Zumba</td>
+                        <td class="class-name">CrossFit</td>
+                        <td class="class-name">Pilates</td>
+                        <td class="class-name">Yoga</td>
+                        <td class="class-name">Spinning</td>
+                        <td class="class-name">Yoga</td>
+                        <td class="class-name">CrossFit</td>
+                    </tr>
+                    <tr>
+                        <td class="time-slot">19:00</td>
+                        <td class="class-name">Pilates</td>
+                        <td class="class-name">Zumba</td>
+                        <td class="class-name">Spinning</td>
+                        <td class="class-name">CrossFit</td>
+                        <td class="class-name">Yoga</td>
+                        <td class="class-name">Pilates</td>
+                        <td class="class-name">Zumba</td>
+                    </tr>
+                    <tr>
+                        <td class="time-slot">20:00</td>
+                        <td class="class-name">CrossFit</td>
+                        <td class="class-name">Yoga</td>
+                        <td class="class-name">Zumba</td>
+                        <td class="class-name">Spinning</td>
+                        <td class="class-name">CrossFit</td>
+                        <td class="class-name">Spinning</td>
+                        <td class="class-name">Yoga</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contacto" class="section">
+        <h2>Contacto</h2>
+        <div class="contact-content">
+            <div class="contact-info">
+                <h3>Información de Contacto</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Av. Fitness 456, Zona Deportiva</p>
+                <p><i class="fas fa-phone"></i> (555) 987-6543</p>
+                <p><i class="fas fa-envelope"></i> info@powerfitgym.com</p>
+                <p><i class="fas fa-clock"></i> Lunes a Domingo: 05:00 - 23:00</p>
+                <p><i class="fas fa-calendar"></i> 24/7 para miembros Elite</p>
+                
+                <h3 style="margin-top: 2rem;">Horarios de Atención</h3>
+                <p><strong>Recepción:</strong> 05:00 - 23:00</p>
+                <p><strong>Entrenadores:</strong> 06:00 - 22:00</p>
+                <p><strong>Clases:</strong> Consultar horario</p>
+            </div>
+            
+            <div class="contact-form">
+                <h3>Consulta Gratuita</h3>
+                <form>
+                    <div class="form-group">
+                        <label for="name">Nombre Completo</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Teléfono</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="goal">Objetivo Principal</label>
+                        <select id="goal" name="goal" required>
+                            <option value="">Seleccionar objetivo</option>
+                            <option value="perdida-peso">Pérdida de peso</option>
+                            <option value="ganancia-musculo">Ganancia de músculo</option>
+                            <option value="condicion-fisica">Mejorar condición física</option>
+                            <option value="flexibilidad">Aumentar flexibilidad</option>
+                            <option value="salud-general">Salud general</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="experience">Experiencia en Gimnasio</label>
+                        <select id="experience" name="experience" required>
+                            <option value="">Seleccionar nivel</option>
+                            <option value="principiante">Principiante</option>
+                            <option value="intermedio">Intermedio</option>
+                            <option value="avanzado">Avanzado</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Mensaje</label>
+                        <textarea id="message" name="message" rows="4" placeholder="Cuéntanos sobre tus objetivos y cualquier pregunta que tengas..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Enviar Consulta</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <h3>PowerFit Gym</h3>
+            <p>Transforma tu cuerpo, transforma tu vida</p>
+            <p>Av. Fitness 456, Zona Deportiva | (555) 987-6543</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+            </div>
+            <p style="margin-top: 2rem; color: #999;">&copy; 2024 PowerFit Gym. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            const rate = scrolled * -0.5;
+            hero.style.transform = `translateY(${rate}px)`;
+        });
+
+        // Add hover effect to plan cards
+        document.querySelectorAll('.plan-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                if (!this.classList.contains('featured')) {
+                    this.style.transform = 'translateY(-10px)';
+                }
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                if (!this.classList.contains('featured')) {
+                    this.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        // Add pulse animation to featured plan
+        document.querySelector('.plan-card.featured').classList.add('pulse');
+
+        // Form submission handling
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('¡Gracias por tu consulta! Te contactaremos pronto para programar tu sesión gratuita.');
+        });
+    </script>
+</body>
+</html>
+
+

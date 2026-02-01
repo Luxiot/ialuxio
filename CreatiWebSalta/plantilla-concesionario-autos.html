@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoMax - Tu Concesionario de Confianza</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background-color: #f8f9fa;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ecf0f1;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #f39c12;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(231, 76, 60, 0.8), rgba(192, 57, 43, 0.8)), url('https://images.unsplash.com/photo-1492144535155-9d4c1a0d0c9e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 80px;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .cta-button {
+            background: #f39c12;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            margin: 0 1rem;
+        }
+
+        .cta-button:hover {
+            background: #e67e22;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(243, 156, 18, 0.4);
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            border: 2px solid #f39c12;
+        }
+
+        .cta-button.secondary:hover {
+            background: #f39c12;
+        }
+
+        /* Sections */
+        .section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section h2 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            color: #2c3e50;
+            position: relative;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: #e74c3c;
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            text-align: center;
+            border-top: 5px solid #e74c3c;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .service-card i {
+            font-size: 3rem;
+            color: #e74c3c;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .service-card p {
+            color: #7f8c8d;
+            line-height: 1.6;
+        }
+
+        /* Cars Section */
+        .cars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .car-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .car-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .car-image {
+            height: 250px;
+            overflow: hidden;
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+
+        .car-info {
+            padding: 1.5rem;
+        }
+
+        .car-info h3 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .car-info .car-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        .car-price {
+            color: #e74c3c;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .car-features {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .feature-tag {
+            background: #f39c12;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+
+        .car-btn {
+            background: #e74c3c;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .car-btn:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+        }
+
+        /* Financing Section */
+        .financing-section {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+            margin: 3rem 0;
+        }
+
+        .financing-section h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .financing-section h2::after {
+            background: #f39c12;
+        }
+
+        .financing-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .financing-option {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .financing-option h3 {
+            color: #f39c12;
+            margin-bottom: 1rem;
+        }
+
+        .financing-option p {
+            color: #bdc3c7;
+            margin-bottom: 1rem;
+        }
+
+        .financing-option .rate {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #f39c12;
+        }
+
+        /* Testimonials Section */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            border-left: 4px solid #e74c3c;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: #7f8c8d;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .testimonial-author {
+            color: #2c3e50;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .testimonial-rating {
+            color: #f39c12;
+            margin-top: 0.5rem;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .contact-info h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .contact-info p {
+            margin-bottom: 1rem;
+            color: #7f8c8d;
+        }
+
+        .contact-info i {
+            color: #e74c3c;
+            margin-right: 1rem;
+            width: 20px;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #e74c3c;
+        }
+
+        .submit-btn {
+            background: #e74c3c;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 5rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer h3 {
+            color: #e74c3c;
+            margin-bottom: 1rem;
+        }
+
+        .footer p {
+            margin-bottom: 1rem;
+            color: #bdc3c7;
+        }
+
+        .social-links {
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            color: #e74c3c;
+            font-size: 1.5rem;
+            margin: 0 1rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: white;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+
+            .hero-content .cta-button {
+                display: block;
+                margin: 1rem auto;
+                width: 200px;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .section {
+                padding: 3rem 1rem;
+            }
+
+            .financing-options {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .slide-in-right {
+            animation: slideInRight 0.8s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">🚗 AutoMax</div>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#vehiculos">Vehículos</a></li>
+                <li><a href="#financiamiento">Financiamiento</a></li>
+                <li><a href="#testimonios">Testimonios</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="hero-content fade-in-up">
+            <h1>AutoMax</h1>
+            <p>Tu concesionario de confianza para encontrar el auto perfecto</p>
+            <div>
+                <a href="#vehiculos" class="cta-button">Ver Vehículos</a>
+                <a href="#financiamiento" class="cta-button secondary">Financiamiento</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicios" class="section">
+        <h2>Nuestros Servicios</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <i class="fas fa-car"></i>
+                <h3>Venta de Vehículos</h3>
+                <p>Amplia selección de autos nuevos y seminuevos de las mejores marcas del mercado.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-tools"></i>
+                <h3>Servicio Técnico</h3>
+                <p>Mantenimiento y reparación de vehículos con técnicos certificados y garantía.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-handshake"></i>
+                <h3>Financiamiento</h3>
+                <p>Opciones de crédito flexibles y tasas competitivas para facilitar tu compra.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-exchange-alt"></i>
+                <h3>Cambio de Vehículo</h3>
+                <p>Evaluamos tu auto actual y te ofrecemos la mejor opción de cambio.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Garantía Extendida</h3>
+                <p>Protección adicional para tu vehículo con planes de garantía personalizados.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-phone"></i>
+                <h3>Atención 24/7</h3>
+                <p>Servicio de emergencias y asistencia en carretera disponible todo el día.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cars Section -->
+    <section id="vehiculos" class="section">
+        <h2>Vehículos Destacados</h2>
+        <div class="cars-grid">
+            <div class="car-card">
+                <div class="car-image">
+                    <i class="fas fa-car"></i>
+                </div>
+                <div class="car-info">
+                    <h3>Toyota Corolla 2024</h3>
+                    <div class="car-details">
+                        <span><i class="fas fa-calendar"></i> 2024</span>
+                        <span><i class="fas fa-road"></i> 0 km</span>
+                    </div>
+                    <div class="car-price">$25,500 USD</div>
+                    <div class="car-features">
+                        <span class="feature-tag">Automático</span>
+                        <span class="feature-tag">Gasolina</span>
+                        <span class="feature-tag">4 puertas</span>
+                    </div>
+                    <button class="car-btn">Ver Detalles</button>
+                </div>
+            </div>
+            
+            <div class="car-card">
+                <div class="car-image">
+                    <i class="fas fa-car"></i>
+                </div>
+                <div class="car-info">
+                    <h3>Honda Civic 2023</h3>
+                    <div class="car-details">
+                        <span><i class="fas fa-calendar"></i> 2023</span>
+                        <span><i class="fas fa-road"></i> 15,000 km</span>
+                    </div>
+                    <div class="car-price">$22,800 USD</div>
+                    <div class="car-features">
+                        <span class="feature-tag">Automático</span>
+                        <span class="feature-tag">Híbrido</span>
+                        <span class="feature-tag">5 puertas</span>
+                    </div>
+                    <button class="car-btn">Ver Detalles</button>
+                </div>
+            </div>
+            
+            <div class="car-card">
+                <div class="car-image">
+                    <i class="fas fa-car"></i>
+                </div>
+                <div class="car-info">
+                    <h3>Nissan Sentra 2024</h3>
+                    <div class="car-details">
+                        <span><i class="fas fa-calendar"></i> 2024</span>
+                        <span><i class="fas fa-road"></i> 0 km</span>
+                    </div>
+                    <div class="car-price">$23,200 USD</div>
+                    <div class="car-features">
+                        <span class="feature-tag">Automático</span>
+                        <span class="feature-tag">Gasolina</span>
+                        <span class="feature-tag">4 puertas</span>
+                    </div>
+                    <button class="car-btn">Ver Detalles</button>
+                </div>
+            </div>
+            
+            <div class="car-card">
+                <div class="car-image">
+                    <i class="fas fa-car"></i>
+                </div>
+                <div class="car-info">
+                    <h3>Mazda 3 2023</h3>
+                    <div class="car-details">
+                        <span><i class="fas fa-calendar"></i> 2023</span>
+                        <span><i class="fas fa-road"></i> 8,500 km</span>
+                    </div>
+                    <div class="car-price">$24,500 USD</div>
+                    <div class="car-features">
+                        <span class="feature-tag">Automático</span>
+                        <span class="feature-tag">Gasolina</span>
+                        <span class="feature-tag">4 puertas</span>
+                    </div>
+                    <button class="car-btn">Ver Detalles</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Financing Section -->
+    <section id="financiamiento" class="financing-section">
+        <h2>Opciones de Financiamiento</h2>
+        <div class="financing-options">
+            <div class="financing-option">
+                <h3>Crédito Directo</h3>
+                <p>Financiamiento directo con tasas preferenciales para clientes calificados.</p>
+                <div class="rate">Desde 8.9%</div>
+            </div>
+            <div class="financing-option">
+                <h3>Leasing</h3>
+                <p>Opción de leasing con pagos mensuales bajos y opción de compra al final.</p>
+                <div class="rate">Desde 6.5%</div>
+            </div>
+            <div class="financing-option">
+                <h3>Crédito Bancario</h3>
+                <p>Convenios con bancos para obtener las mejores tasas del mercado.</p>
+                <div class="rate">Desde 7.2%</div>
+            </div>
+            <div class="financing-option">
+                <h3>Plan de Ahorro</h3>
+                <p>Programa de ahorro progresivo para adquirir tu vehículo en el futuro.</p>
+                <div class="rate">Sin intereses</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonios" class="section">
+        <h2>Lo Que Dicen Nuestros Clientes</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-text">
+                    "Excelente servicio y atención. Encontré el auto perfecto para mi familia con un financiamiento muy conveniente."
+                </div>
+                <div class="testimonial-author">María González</div>
+                <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-text">
+                    "El proceso de compra fue muy sencillo y transparente. Recomiendo AutoMax a todos mis amigos."
+                </div>
+                <div class="testimonial-author">Carlos Ruiz</div>
+                <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-text">
+                    "El servicio técnico es de primera calidad. Mi auto siempre está en las mejores manos."
+                </div>
+                <div class="testimonial-author">Ana Martínez</div>
+                <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contacto" class="section">
+        <h2>Contacto</h2>
+        <div class="contact-content">
+            <div class="contact-info">
+                <h3>Información de Contacto</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Av. Automotriz 789, Zona Industrial</p>
+                <p><i class="fas fa-phone"></i> (555) 234-5678</p>
+                <p><i class="fas fa-envelope"></i> info@automax.com</p>
+                <p><i class="fas fa-clock"></i> Lunes a Sábado: 09:00 - 19:00</p>
+                <p><i class="fas fa-calendar"></i> Domingo: 10:00 - 16:00</p>
+                
+                <h3 style="margin-top: 2rem;">Servicios Adicionales</h3>
+                <p><strong>Servicio Técnico:</strong> Lunes a Viernes: 08:00 - 18:00</p>
+                <p><strong>Financiamiento:</strong> Lunes a Viernes: 09:00 - 17:00</p>
+                <p><strong>Emergencias:</strong> 24/7</p>
+            </div>
+            
+            <div class="contact-form">
+                <h3>Solicitar Información</h3>
+                <form>
+                    <div class="form-group">
+                        <label for="name">Nombre Completo</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Teléfono</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="interest">Interés Principal</label>
+                        <select id="interest" name="interest" required>
+                            <option value="">Seleccionar interés</option>
+                            <option value="compra">Compra de Vehículo</option>
+                            <option value="financiamiento">Financiamiento</option>
+                            <option value="servicio">Servicio Técnico</option>
+                            <option value="cambio">Cambio de Vehículo</option>
+                            <option value="garantia">Garantía Extendida</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="budget">Presupuesto Aproximado</label>
+                        <select id="budget" name="budget" required>
+                            <option value="">Seleccionar rango</option>
+                            <option value="15-20k">$15,000 - $20,000 USD</option>
+                            <option value="20-25k">$20,000 - $25,000 USD</option>
+                            <option value="25-30k">$25,000 - $30,000 USD</option>
+                            <option value="30k+">Más de $30,000 USD</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="timeline">Tiempo de Compra</label>
+                        <select id="timeline" name="timeline" required>
+                            <option value="">Seleccionar tiempo</option>
+                            <option value="inmediato">Inmediato (1-2 semanas)</option>
+                            <option value="corto">Corto plazo (1-2 meses)</option>
+                            <option value="medio">Mediano plazo (3-6 meses)</option>
+                            <option value="largo">Largo plazo (6+ meses)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Mensaje</label>
+                        <textarea id="message" name="message" rows="4" placeholder="Comentarios adicionales o preguntas específicas..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Enviar Solicitud</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <h3>AutoMax</h3>
+            <p>Tu concesionario de confianza para encontrar el auto perfecto</p>
+            <p>Av. Automotriz 789, Zona Industrial | (555) 234-5678</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+            <p style="margin-top: 2rem; color: #95a5a6;">&copy; 2024 AutoMax. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission handling
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('¡Gracias por tu interés! Te contactaremos pronto con toda la información sobre nuestros vehículos y servicios.');
+        });
+
+        // Add hover effect to service cards
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Add slide in animation to car cards
+        document.querySelectorAll('.car-card').forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.1}s`;
+            card.classList.add('slide-in-right');
+        });
+
+        // Add hover effect to car cards
+        document.querySelectorAll('.car-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Add hover effect to testimonial cards
+        document.querySelectorAll('.testimonial-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>
+
+

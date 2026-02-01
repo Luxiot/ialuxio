@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CreatiWebSalta - Desarrollo Web Profesional</title>
+    <link rel="icon" type="image/png" href="logo-cws.png">
+    <link rel="shortcut icon" type="image/png" href="logo-cws.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #f5576c);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            overflow-x: hidden;
+            color: white;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #fff, #f0f0f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(255,255,255,0.5);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            transform: translateY(-2px);
+            text-shadow: 0 5px 10px rgba(255,255,255,0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content {
+            z-index: 2;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 20px rgba(255,255,255,0.5), 0 0 30px rgba(255,255,255,0.3); }
+            to { text-shadow: 0 0 30px rgba(255,255,255,0.8), 0 0 40px rgba(255,255,255,0.5); }
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.8;
+            font-style: italic;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        /* Floating Elements */
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .floating-element {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            top: 60%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        .floating-element:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            top: 40%;
+            right: 30%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        /* Services Section */
+        .services {
+            padding: 100px 0;
+            background: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .services h2 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            text-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .service-card:hover::before {
+            left: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .service-card p {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+        }
+
+
+
+        /* Portfolio Section */
+        .portfolio {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .portfolio h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .portfolio-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            opacity: 0.8;
+            font-style: italic;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .portfolio-item {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 1.5rem;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .portfolio-image {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        .portfolio-image img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: all 0.4s ease;
+        }
+
+        .portfolio-item:hover .portfolio-image img {
+            transform: scale(1.1);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.9), rgba(118, 75, 162, 0.9));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .portfolio-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .portfolio-tech span {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .portfolio-item h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: #fff;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .portfolio-item p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .portfolio-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .portfolio-features span {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-features span:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive adjustments for portfolio */
+        @media (max-width: 768px) {
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .portfolio-item {
+                padding: 1rem;
+            }
+            
+            .portfolio-image img {
+                height: 200px;
+            }
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            text-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .contact-methods {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .contact-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 20px 30px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 50px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .mobile-menu-btn {
+                display: block !important;
+            }
+            
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                gap: 1rem;
+                position: absolute;
+                top: 100%;
+                right: 20px;
+                background: rgba(0, 0, 0, 0.95);
+                padding: 20px;
+                border-radius: 15px;
+                backdrop-filter: blur(20px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+                z-index: 1000;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .contact-methods {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.8s ease;
+        }
+        
+        /* Asegurar que las secciones sean visibles */
+        .services, .portfolio, .contact {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+        
+        /* Debug: mostrar bordes para verificar posicionamiento */
+        .services, .portfolio, .contact {
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            margin: 20px 0;
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Particles effect */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: particle-move 10s linear infinite;
+        }
+
+        @keyframes particle-move {
+            from {
+                transform: translateY(100vh) translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(-10vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        /* Animación de pulso para WhatsApp */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+            }
+            50% {
+                box-shadow: 0 10px 30px rgba(37, 211, 102, 0.8), 0 0 20px rgba(37, 211, 102, 0.6);
+            }
+            100% {
+                box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+
+    <header>
+        <nav class="container">
+            <div class="logo">CreatiWebSalta</div>
+            
+            <!-- Menú hamburguesa para móvil -->
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()" style="
+                display: none;
+                background: none;
+                border: none;
+                color: white;
+                font-size: 24px;
+                cursor: pointer;
+                padding: 10px;
+            ">☰</button>
+            
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#inicio" onclick="closeMobileMenu()">Inicio</a></li>
+                <li><a href="#servicios" onclick="closeMobileMenu()">Servicios</a></li>
+                <li><a href="#portfolio" onclick="closeMobileMenu()">Portfolio</a></li>
+                <li><a href="#contacto" onclick="closeMobileMenu()">Contacto</a></li>
+            </ul>
+            
+
+        </nav>
+    </header>
+
+    <main>
+        <section id="inicio" class="hero">
+            <div class="floating-elements">
+                <div class="floating-element"></div>
+                <div class="floating-element"></div>
+                <div class="floating-element"></div>
+            </div>
+            <div class="hero-content container">
+                <h1>CreatiWebSalta</h1>
+                <p>Desarrollo Web Profesional en Salta</p>
+                <p class="hero-subtitle">Transformo ideas en experiencias digitales extraordinarias</p>
+                <div class="cta-buttons">
+                    <a href="#contacto" class="btn btn-primary">¡Iniciar Proyecto!</a>
+                    <a href="#servicios" class="btn btn-secondary">Ver Servicios</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="servicios" class="services fade-in">
+            <div class="container">
+                <h2>Nuestros Servicios</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">🚀</div>
+                        <h3>Desarrollo Frontend</h3>
+                        <p>Interfaces modernas y responsivas con HTML5, CSS3, JavaScript, React, Vue.js. Experiencias de usuario excepcionales que convierten visitantes en clientes.</p>
+
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">⚙️</div>
+                        <h3>Desarrollo Backend</h3>
+                        <p>APIs robustas y escalables con Node.js, Python, PHP. Bases de datos optimizadas y arquitecturas seguras para tu negocio.</p>
+
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🌐</div>
+                        <h3>Sitios Web Completos</h3>
+                        <p>Desarrollo full-stack desde el concepto hasta el deploy. Sitios corporativos, e-commerce, plataformas personalizadas y más.</p>
+
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">📱</div>
+                        <h3>Diseño Responsivo</h3>
+                        <p>Sitios que se adaptan perfectamente a cualquier dispositivo. Mobile-first, optimización de velocidad y experiencia fluida.</p>
+
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🔧</div>
+                        <h3>Mantenimiento Web</h3>
+                        <p>Actualizaciones, optimización, seguridad y soporte técnico continuo. Mantengo tu sitio siempre al día y funcionando perfectamente.</p>
+
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🎨</div>
+                        <h3>UI/UX Design</h3>
+                        <p>Diseños intuitivos y atractivos que mejoran la experiencia del usuario. Interfaces que combinan belleza con funcionalidad.</p>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio" class="portfolio fade-in">
+            <div class="container">
+                                 <h2>Nuestras Plantillas Web</h2>
+                 <p class="portfolio-subtitle">12 Plantillas Profesionales para Diferentes Tipos de Negocios</p>
+                <div class="portfolio-grid">
+                    <!-- Plantilla Hotel -->
+                    <div class="portfolio-item">
+                        <div class="portfolio-image">
+                            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=250&fit=crop&crop=center" alt="Plantilla Hotel">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-tech">
+                                    <span>HTML5</span>
+                                    <span>CSS3</span>
+                                    <span>JavaScript</span>
+                                </div>
+                            </div>
+                        </div>
+                        <h3>🏨 Hotel de Lujo</h3>
+                        <p>Plantilla elegante para hoteles y resorts con sistema de reservas, galería de habitaciones y servicios premium</p>
+                        <div class="portfolio-features">
+                            <span>📅 Reservas Online</span>
+                            <span>🏠 Galería de Habitaciones</span>
+                            <span>⭐ Servicios Premium</span>
+                        </div>
+                        <div style="text-align: center; margin-top: 1rem;">
+                            <a href="plantilla-hotel.html" style="
+                                background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+                                color: white;
+                                padding: 10px 20px;
+                                border-radius: 25px;
+                                text-decoration: none;
+                                font-weight: bold;
+                                transition: all 0.3s ease;
+                                display: inline-block;
+                            " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                                Ver Plantilla
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Plantilla Gimnasio -->
+                    <div class="portfolio-item">
+                        <div class="portfolio-image">
+                            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=250&fit=crop&crop=center" alt="Plantilla Gimnasio">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-tech">
+                                    <span>HTML5</span>
+                                    <span>CSS3</span>
+                                    <span>JavaScript</span>
+                                </div>
+                            </div>
+                        </div>
+                        <h3>💪 Gimnasio PowerFit</h3>
+                        <p>Plantilla energética para gimnasios con horarios de clases, planes de membresía y perfiles de entrenadores</p>
+                        <div class="portfolio-features">
+                            <span>⏰ Horarios de Clases</span>
+                            <span>💳 Planes de Membresía</span>
+                            <span>🏋️ Perfiles de Entrenadores</span>
+                        </div>
+                        <div style="text-align: center; margin-top: 1rem;">
+                            <a href="plantilla-gimnasio.html" style="
+                                background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+                                color: white;
+                                padding: 10px 20px;
+                                border-radius: 25px;
+                                text-decoration: none;
+                                font-weight: bold;
+                                transition: all 0.3s ease;
+                                display: inline-block;
+                            " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                                Ver Plantilla
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Plantilla Restaurante -->
+                    <div class="portfolio-item">
+                        <div class="portfolio-image">
+                            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&h=250&fit=crop&crop=center" alt="Plantilla Restaurante">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-tech">
+                                    <span>HTML5</span>
+                                    <span>CSS3</span>
+                                    <span>JavaScript</span>
+                                </div>
+                            </div>
+                        </div>
+                        <h3>🍽️ Restaurante Gourmet</h3>
+                        <p>Plantilla sofisticada para restaurantes con menú digital, sistema de reservas y galería de platos</p>
+                        <div class="portfolio-features">
+                            <span>🍽️ Menú Digital</span>
+                            <span>📅 Sistema de Reservas</span>
+                            <span>📸 Galería de Platos</span>
+                        </div>
+                        <div style="text-align: center; margin-top: 1rem;">
+                            <a href="plantilla-restaurante.html" style="
+                                background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+                                color: white;
+                                padding: 10px 20px;
+                                border-radius: 25px;
+                                text-decoration: none;
+                                font-weight: bold;
+                                transition: all 0.3s ease;
+                                display: inline-block;
+                            " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                                Ver Plantilla
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Plantilla Empresa de Servicios -->
+                    <div class="portfolio-item">
+                        <div class="portfolio-image">
+                            <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=250&fit=crop&crop=center" alt="Plantilla Empresa de Servicios">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-tech">
+                                    <span>HTML5</span>
+                                    <span>CSS3</span>
+                                    <span>JavaScript</span>
+                                </div>
+                            </div>
+                        </div>
+                        <h3>🏢 Empresa de Servicios</h3>
+                        <p>Plantilla profesional para empresas de servicios con catálogo de servicios, testimonios y formularios de contacto</p>
+                        <div class="portfolio-features">
+                            <span>📋 Catálogo de Servicios</span>
+                            <span>💬 Testimonios</span>
+                            <span>📝 Formularios de Contacto</span>
+                        </div>
+                        <div style="text-align: center; margin-top: 1rem;">
+                            <a href="plantilla-empresa-servicios.html" style="
+                                background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+                                color: white;
+                                padding: 10px 20px;
+                                border-radius: 25px;
+                                text-decoration: none;
+                                font-weight: bold;
+                                transition: all 0.3s ease;
+                                display: inline-block;
+                            " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                                Ver Plantilla
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Plantilla Restaurante Gourmet (Usuario) -->
+                    <div class="portfolio-item">
+                        <div class="portfolio-image">
+                            <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&h=250&fit=crop&crop=center" alt="Plantilla Restaurante Gourmet">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-tech">
+                                    <span>HTML5</span>
+                                    <span>CSS3</span>
+                                    <span>JavaScript</span>
+                                </div>
+                            </div>
+                        </div>
+                        <h3>🍷 Sabores Gourmet</h3>
+                        <p>Plantilla elegante para restaurantes gourmet con historia, menú categorizado y sistema de reservas personalizado</p>
+                        <div class="portfolio-features">
+                            <span>📖 Historia del Restaurante</span>
+                            <span>🍽️ Menú Categorizado</span>
+                            <span>📸 Galería de Platos</span>
+                        </div>
+                        <div style="text-align: center; margin-top: 1rem;">
+                            <a href="plantilla-restaurante-gourmet.html" style="
+                                background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+                                color: white;
+                                padding: 10px 20px;
+                                border-radius: 25px;
+                                text-decoration: none;
+                                font-weight: bold;
+                                transition: all 0.3s ease;
+                                display: inline-block;
+                            " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                                Ver Plantilla
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Plantilla Gimnasio PowerFit (Usuario) -->
+                    <div class="portfolio-item">
+                        <div class="portfolio-image">
+                            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=250&fit=crop&crop=center" alt="Plantilla Gimnasio PowerFit">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-tech">
+                                    <span>HTML5</span>
+                                    <span>CSS3</span>
+                                    <span>JavaScript</span>
+                                </div>
+                            </div>
+                        </div>
+                        <h3>🏋️ PowerFit Gym</h3>
+                        <p>Plantilla moderna para gimnasios con servicios, planes de membresía, entrenadores y horarios detallados</p>
+                        <div class="portfolio-features">
+                            <span>💪 Servicios del Gimnasio</span>
+                            <span>💳 Planes de Membresía</span>
+                            <span>🏋️ Perfiles de Entrenadores</span>
+                        </div>
+                        <div style="text-align: center; margin-top: 1rem;">
+                            <a href="plantilla-gimnasio-powerfit.html" style="
+                                background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+                                color: white;
+                                padding: 10px 20px;
+                                border-radius: 25px;
+                                text-decoration: none;
+                                font-weight: bold;
+                                transition: all 0.3s ease;
+                                display: inline-block;
+                            " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                                Ver Plantilla
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Plantilla Clínica Médica -->
+                    <div class="portfolio-item">
+                        <div class="portfolio-image">
+                            <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=250&fit=crop&crop=center" alt="Plantilla Clínica Médica">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-tech">
+                                    <span>HTML5</span>
+                                    <span>CSS3</span>
+                                    <span>JavaScript</span>
+                                </div>
+                            </div>
+                        </div>
+                        <h3>🏥 Centro Médico Integral</h3>
+                        <p>Plantilla profesional para clínicas médicas con servicios, doctores, citas online y emergencias 24/7</p>
+                        <div class="portfolio-features">
+                            <span>🏥 Servicios Médicos</span>
+                            <span>👨‍⚕️ Perfiles de Doctores</span>
+                            <span>📅 Citas Online</span>
+                        </div>
+                        <div style="text-align: center; margin-top: 1rem;">
+                            <a href="plantilla-clinica-medica.html" style="
+                                background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+                                color: white;
+                                padding: 10px 20px;
+                                border-radius: 25px;
+                                text-decoration: none;
+                                font-weight: bold;
+                                transition: all 0.3s ease;
+                                display: inline-block;
+                            " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                                Ver Plantilla
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Plantilla Instituto Educativo -->
+                    <div class="portfolio-item">
+                        <div class="portfolio-image">
+                            <img src="https://images.unsplash.com/photo-1523050854058-8df81610b38b?w=400&h=250&fit=crop&crop=center" alt="Plantilla Instituto Educativo">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-tech">
+                                    <span>HTML5</span>
+                                    <span>CSS3</span>
+                                    <span>JavaScript</span>
+                                </div>
+                            </div>
+                        </div>
+                        <h3>🎓 Instituto de Excelencia</h3>
+                        <p>Plantilla académica para institutos educativos con programas, profesores, estadísticas y calendario académico</p>
+                        <div class="portfolio-features">
+                            <span>📚 Programas Educativos</span>
+                            <span>👨‍🏫 Perfiles de Profesores</span>
+                            <span>📊 Estadísticas Académicas</span>
+                        </div>
+                        <div style="text-align: center; margin-top: 1rem;">
+                            <a href="plantilla-instituto-educativo.html" style="
+                                background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+                                color: white;
+                                padding: 10px 20px;
+                                border-radius: 25px;
+                                text-decoration: none;
+                                font-weight: bold;
+                                transition: all 0.3s ease;
+                                display: inline-block;
+                            " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                                Ver Plantilla
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Plantilla Concesionario de Autos -->
+                    <div class="portfolio-item">
+                        <div class="portfolio-image">
+                            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=250&fit=crop&crop=center" alt="Plantilla Concesionario de Autos">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-tech">
+                                    <span>HTML5</span>
+                                    <span>CSS3</span>
+                                    <span>JavaScript</span>
+                                </div>
+                            </div>
+                        </div>
+                        <h3>🚗 AutoMax Concesionario</h3>
+                        <p>Plantilla dinámica para concesionarios de autos con servicios, vehículos destacados y opciones de financiamiento</p>
+                        <div class="portfolio-features">
+                            <span>🔧 Servicios Automotrices</span>
+                            <span>🚙 Vehículos Destacados</span>
+                            <span>💰 Opciones de Financiamiento</span>
+                        </div>
+                        <div style="text-align: center; margin-top: 1rem;">
+                            <a href="plantilla-concesionario-autos.html" style="
+                                background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+                                color: white;
+                                padding: 10px 20px;
+                                border-radius: 25px;
+                                text-decoration: none;
+                                font-weight: bold;
+                                transition: all 0.3s ease;
+                                display: inline-block;
+                            " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                                Ver Plantilla
+                            </a>
+                        </div>
+                    </div>
+
+                                         <!-- Plantilla E-commerce -->
+                     <div class="portfolio-item">
+                         <div class="portfolio-image">
+                             <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=250&fit=crop&crop=center" alt="Plantilla E-commerce">
+                             <div class="portfolio-overlay">
+                                 <div class="portfolio-tech">
+                                     <span>HTML5</span>
+                                     <span>CSS3</span>
+                                     <span>JavaScript</span>
+                                 </div>
+                             </div>
+                         </div>
+                         <h3>🛒 ShopMax E-commerce</h3>
+                         <p>Plantilla comercial para tiendas online con categorías, productos destacados y funcionalidades de carrito de compras</p>
+                         <div class="portfolio-features">
+                             <span>📦 Categorías de Productos</span>
+                             <span>⭐ Productos Destacados</span>
+                             <span>🛒 Carrito de Compras</span>
+                         </div>
+                         <div style="text-align: center; margin-top: 1rem;">
+                             <a href="plantilla-ecommerce.html" style="
+                                 background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+                                 color: white;
+                                 padding: 10px 20px;
+                                 border-radius: 25px;
+                                 text-decoration: none;
+                                 font-weight: bold;
+                                 transition: all 0.3s ease;
+                                 display: inline-block;
+                             " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                                 Ver Plantilla
+                             </a>
+                         </div>
+                     </div>
+
+                                           <!-- Plantilla Urban Retreat Hotel -->
+                      <div class="portfolio-item">
+                          <div class="portfolio-image">
+                              <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=250&fit=crop&crop=center" alt="Plantilla Urban Retreat Hotel">
+                              <div class="portfolio-overlay">
+                                  <div class="portfolio-tech">
+                                      <span>HTML5</span>
+                                      <span>CSS3</span>
+                                      <span>JavaScript</span>
+                                  </div>
+                              </div>
+                          </div>
+                          <h3>🏙️ Urban Retreat Hotel</h3>
+                          <p>Plantilla moderna y minimalista para hoteles contemporáneos con tecnología inteligente y diseño vanguardista</p>
+                          <div class="portfolio-features">
+                              <span>🏙️ Diseño Urbano Moderno</span>
+                              <span>⚡ Tecnología Inteligente</span>
+                              <span>🎨 Estilo Minimalista</span>
+                          </div>
+                          <div style="text-align: center; margin-top: 1rem;">
+                              <a href="plantilla-hotel-moderno.html" style="
+                                  background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+                                  color: white;
+                                  padding: 10px 20px;
+                                  border-radius: 25px;
+                                  text-decoration: none;
+                                  font-weight: bold;
+                                  transition: all 0.3s ease;
+                                  display: inline-block;
+                              " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                                  Ver Plantilla
+                              </a>
+                          </div>
+                      </div>
+
+                      <!-- Plantilla Grand Palace Hotel -->
+                      <div class="portfolio-item">
+                          <div class="portfolio-image">
+                              <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=250&fit=crop&crop=center" alt="Plantilla Grand Palace Hotel">
+                              <div class="portfolio-overlay">
+                                  <div class="portfolio-tech">
+                                      <span>HTML5</span>
+                                      <span>CSS3</span>
+                                      <span>JavaScript</span>
+                                  </div>
+                              </div>
+                          </div>
+                          <h3>🏰 Grand Palace Hotel</h3>
+                          <p>Plantilla clásica y elegante para hoteles de lujo con estilo tradicional, sistema de reservas y servicios premium</p>
+                          <div class="portfolio-features">
+                              <span>🏰 Estilo Clásico Elegante</span>
+                              <span>📅 Sistema de Reservas</span>
+                              <span>⭐ Servicios Premium</span>
+                          </div>
+                          <div style="text-align: center; margin-top: 1rem;">
+                              <a href="plantilla-grand-palace-hotel.html" style="
+                                  background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+                                  color: white;
+                                  padding: 10px 20px;
+                                  border-radius: 25px;
+                                  text-decoration: none;
+                                  font-weight: bold;
+                                  transition: all 0.3s ease;
+                                  display: inline-block;
+                              " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                                  Ver Plantilla
+                              </a>
+                          </div>
+                      </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contacto" class="contact fade-in">
+            <div class="container">
+                <h2>¿Listo para tu próximo proyecto?</h2>
+                <p>Contactáme y hagamos realidad tu visión digital</p>
+                <div class="contact-methods">
+                    <a href="mailto:luxioage@gmail.com" class="contact-btn">
+                        <span class="contact-icon">📧</span>
+                        luxioage@gmail.com
+                    </a>
+                    <a href="https://wa.me/543874848712" class="contact-btn" target="_blank">
+                        <span class="contact-icon">📱</span>
+                        WhatsApp
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 CreatiWebSalta - Desarrollo Web Profesional en Salta. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Botón de WhatsApp flotante cerca del chatbot -->
+    <a href="https://wa.me/543874848712" target="_blank" id="whatsapp-float" style="
+        position: fixed;
+        bottom: 85px;
+        right: 15px;
+        width: 55px;
+        height: 55px;
+        background: linear-gradient(135deg, #25d366, #128c7e);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+        z-index: 9998;
+        transition: all 0.4s ease;
+        color: white;
+        text-decoration: none;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        animation: whatsappFloat 3s ease-in-out infinite;
+        overflow: hidden;
+    " onmouseover="this.style.transform='scale(1.15) rotate(5deg)'" onmouseout="this.style.transform='scale(1) rotate(0deg)'">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="filter: brightness(0) invert(1);">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+        </svg>
+        
+        <!-- Indicador de estado online -->
+        <div style="
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            width: 16px;
+            height: 16px;
+            background: #25d366;
+            border-radius: 50%;
+            border: 2px solid white;
+            animation: whatsappPulse 2s infinite;
+            box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+        "></div>
+    </a>
+
+    <!-- CreatiWeb AI - API en Render https://ialuxio.onrender.com -->
+    <script 
+      src="luxio-chat-widget.js?v=2" 
+      data-api-url="https://ialuxio.onrender.com"
+      data-name="CreatiWeb AI"
+    ></script>
+
+    <style>
+        /* Estilos para WhatsApp flotante */
+        #whatsapp-float {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        #whatsapp-float::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        #whatsapp-float:hover::before {
+            left: 100%;
+        }
+        
+        #whatsapp-float:hover {
+            transform: scale(1.15) rotate(5deg);
+            box-shadow: 0 12px 30px rgba(37, 211, 102, 0.7);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        #whatsapp-float:active {
+            transform: scale(0.95);
+            transition: transform 0.1s ease;
+        }
+        
+        @keyframes whatsappFloat {
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg); 
+                box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            }
+            50% { 
+                transform: translateY(-8px) rotate(2deg); 
+                box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
+            }
+        }
+        
+        @keyframes whatsappPulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+            }
+            70% {
+                transform: scale(1.1);
+                box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+            }
+        }
+        
+        @keyframes whatsappSlideIn {
+            from {
+                transform: translateX(100px) scale(0.5);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0) scale(1);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes rippleEffect {
+            to {
+                transform: translate(-50%, -50%) scale(2);
+                opacity: 0;
+            }
+        }
+        
+        /* Efectos de hover para WhatsApp */
+        #whatsapp-float:hover {
+            transform: scale(1.15) rotate(5deg);
+            box-shadow: 0 15px 40px rgba(37, 211, 102, 0.6);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+        
+        #whatsapp-float:hover > div:first-child {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: scale(1.1);
+        }
+        
+        #whatsapp-float:hover > div:nth-child(3) {
+            left: 100%;
+        }
+        
+        #whatsapp-float:hover #whatsapp-tooltip {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        /* Efecto de click */
+        #whatsapp-float:active {
+            transform: scale(0.95);
+            transition: transform 0.1s ease;
+        }
+        
+        /* Efecto de focus para accesibilidad */
+        #whatsapp-float:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.3);
+        }
+        
+        /* Animación de entrada */
+        #whatsapp-float {
+            animation: whatsappFloat 3s ease-in-out infinite, whatsappSlideIn 0.8s ease-out;
+        }
+        
+        /* Responsive para WhatsApp flotante */
+        @media (max-width: 768px) {
+            #whatsapp-float {
+                width: 50px;
+                height: 50px;
+                bottom: 80px;
+                right: 12px;
+            }
+            
+            #whatsapp-float svg {
+                width: 22px;
+                height: 22px;
+            }
+            
+            #whatsapp-float > div:last-child {
+                width: 14px;
+                height: 14px;
+                top: -1px;
+                right: -1px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            #whatsapp-float {
+                width: 45px;
+                height: 45px;
+                bottom: 75px;
+                right: 10px;
+            }
+            
+            #whatsapp-float svg {
+                width: 20px;
+                height: 20px;
+            }
+            
+            #whatsapp-float > div:last-child {
+                width: 12px;
+                height: 12px;
+            }
+        }
+        
+    </style>
+
+    <script>
+        // CreatiWebSalta - Menú móvil y efectos
+        document.addEventListener('DOMContentLoaded', function() {
+            // Efecto ripple en botón de WhatsApp
+            const whatsappFloat = document.getElementById('whatsapp-float');
+            if (whatsappFloat) {
+                whatsappFloat.addEventListener('click', function() {
+                    const ripple = document.createElement('div');
+                    ripple.style.cssText = `
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        width: 100%;
+                        height: 100%;
+                        background: rgba(255, 255, 255, 0.4);
+                        border-radius: 50%;
+                        transform: translate(-50%, -50%) scale(0);
+                        animation: rippleEffect 0.6s ease-out;
+                        pointer-events: none;
+                    `;
+                    this.appendChild(ripple);
+                    setTimeout(() => ripple.remove(), 600);
+                });
+            }
+            
+            // Menú móvil
+            window.toggleMobileMenu = function() {
+                document.getElementById('nav-links').classList.toggle('active');
+            };
+            window.closeMobileMenu = function() {
+                document.getElementById('nav-links').classList.remove('active');
+            };
+        });
+    </script>
+
+    <!-- Firebase SDK (Analytics) -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-analytics-compat.js"></script>
+    <script>
+      var firebaseConfig = {
+        apiKey: "AIzaSyBiwqIn08mYXxHKnIoQWP26FBbcNJyUdSs",
+        authDomain: "creatiwebsalta.firebaseapp.com",
+        projectId: "creatiwebsalta",
+        storageBucket: "creatiwebsalta.firebasestorage.app",
+        messagingSenderId: "100651506523",
+        appId: "1:100651506523:web:edb23e4e0885bc3736987e",
+        measurementId: "G-KBSWJQX7K6"
+      };
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+    </script>
+</body>
+</html>

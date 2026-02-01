@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopMax - Tu Tienda Online de Confianza</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background-color: #f8f9fa;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ecf0f1;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #f1c40f;
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(155, 89, 182, 0.8), rgba(142, 68, 173, 0.8)), url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 80px;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .cta-button {
+            background: #e74c3c;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            margin: 0 1rem;
+        }
+
+        .cta-button:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            border: 2px solid #e74c3c;
+        }
+
+        .cta-button.secondary:hover {
+            background: #e74c3c;
+        }
+
+        /* Sections */
+        .section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section h2 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            color: #2c3e50;
+            position: relative;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: #9b59b6;
+        }
+
+        /* Categories Section */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            text-align: center;
+            border-top: 5px solid #9b59b6;
+            cursor: pointer;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .category-card i {
+            font-size: 3rem;
+            color: #9b59b6;
+            margin-bottom: 1rem;
+        }
+
+        .category-card h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .category-card p {
+            color: #7f8c8d;
+            line-height: 1.6;
+        }
+
+        /* Products Section */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .product-image {
+            height: 250px;
+            overflow: hidden;
+            background: linear-gradient(45deg, #9b59b6, #8e44ad);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+            position: relative;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #e74c3c;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-info h3 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .product-info .product-category {
+            color: #9b59b6;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-info .product-description {
+            color: #7f8c8d;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .product-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .current-price {
+            color: #e74c3c;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .old-price {
+            color: #95a5a6;
+            text-decoration: line-through;
+            font-size: 1.1rem;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .add-to-cart {
+            background: #9b59b6;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            flex: 1;
+        }
+
+        .add-to-cart:hover {
+            background: #8e44ad;
+            transform: translateY(-2px);
+        }
+
+        .wishlist-btn {
+            background: transparent;
+            border: 2px solid #9b59b6;
+            color: #9b59b6;
+            padding: 0.8rem;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .wishlist-btn:hover {
+            background: #9b59b6;
+            color: white;
+        }
+
+        /* Features Section */
+        .features-section {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+            margin: 3rem 0;
+        }
+
+        .features-section h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .features-section h2::after {
+            background: #f1c40f;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-item {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .feature-item i {
+            font-size: 3rem;
+            color: #f1c40f;
+            margin-bottom: 1rem;
+        }
+
+        .feature-item h3 {
+            color: #f1c40f;
+            margin-bottom: 1rem;
+        }
+
+        .feature-item p {
+            color: #bdc3c7;
+        }
+
+        /* Newsletter Section */
+        .newsletter-section {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+            margin: 3rem 0;
+        }
+
+        .newsletter-section h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter-section h2::after {
+            background: #f39c12;
+        }
+
+        .newsletter-form {
+            max-width: 500px;
+            margin: 2rem auto 0;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+        }
+
+        .newsletter-btn {
+            background: #f39c12;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .newsletter-btn:hover {
+            background: #e67e22;
+            transform: translateY(-2px);
+        }
+
+        /* Contact Section */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .contact-info h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .contact-info p {
+            margin-bottom: 1rem;
+            color: #7f8c8d;
+        }
+
+        .contact-info i {
+            color: #9b59b6;
+            margin-right: 1rem;
+            width: 20px;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #9b59b6;
+        }
+
+        .submit-btn {
+            background: #9b59b6;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background: #8e44ad;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 5rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer h3 {
+            color: #9b59b6;
+            margin-bottom: 1rem;
+        }
+
+        .footer p {
+            margin-bottom: 1rem;
+            color: #bdc3c7;
+        }
+
+        .social-links {
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            color: #9b59b6;
+            font-size: 1.5rem;
+            margin: 0 1rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: white;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+
+            .hero-content .cta-button {
+                display: block;
+                margin: 1rem auto;
+                width: 200px;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .section {
+                padding: 3rem 1rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+            70% {
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .bounce-in {
+            animation: bounceIn 0.8s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">🛒 ShopMax</div>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#categorias">Categorías</a></li>
+                <li><a href="#productos">Productos</a></li>
+                <li><a href="#caracteristicas">Características</a></li>
+                <li><a href="#newsletter">Newsletter</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+            <div class="cart-icon">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count">3</span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="hero-content fade-in-up">
+            <h1>ShopMax</h1>
+            <p>Tu tienda online de confianza con los mejores productos</p>
+            <div>
+                <a href="#productos" class="cta-button">Ver Productos</a>
+                <a href="#categorias" class="cta-button secondary">Explorar</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section id="categorias" class="section">
+        <h2>Categorías Principales</h2>
+        <div class="categories-grid">
+            <div class="category-card">
+                <i class="fas fa-tshirt"></i>
+                <h3>Ropa y Moda</h3>
+                <p>Descubre las últimas tendencias en moda para todas las edades y estilos.</p>
+            </div>
+            <div class="category-card">
+                <i class="fas fa-mobile-alt"></i>
+                <h3>Electrónicos</h3>
+                <p>Los mejores dispositivos electrónicos con tecnología de última generación.</p>
+            </div>
+            <div class="category-card">
+                <i class="fas fa-home"></i>
+                <h3>Hogar y Jardín</h3>
+                <p>Todo lo que necesitas para hacer de tu hogar un lugar más confortable.</p>
+            </div>
+            <div class="category-card">
+                <i class="fas fa-dumbbell"></i>
+                <h3>Deportes</h3>
+                <p>Equipamiento deportivo para mantenerte activo y saludable.</p>
+            </div>
+            <div class="category-card">
+                <i class="fas fa-book"></i>
+                <h3>Libros y Educación</h3>
+                <p>Amplia colección de libros, cursos y materiales educativos.</p>
+            </div>
+            <div class="category-card">
+                <i class="fas fa-gift"></i>
+                <h3>Regalos</h3>
+                <p>Encuentra el regalo perfecto para cualquier ocasión especial.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="productos" class="section">
+        <h2>Productos Destacados</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-image">
+                    <i class="fas fa-tshirt"></i>
+                    <div class="product-badge">Nuevo</div>
+                </div>
+                <div class="product-info">
+                    <h3>Camiseta Premium</h3>
+                    <div class="product-category">Ropa y Moda</div>
+                    <div class="product-description">Camiseta de algodón 100% premium con diseño exclusivo.</div>
+                    <div class="product-price">
+                        <span class="current-price">$29.99</span>
+                        <span class="old-price">$39.99</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart">Agregar al Carrito</button>
+                        <button class="wishlist-btn"><i class="fas fa-heart"></i></button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image">
+                    <i class="fas fa-mobile-alt"></i>
+                    <div class="product-badge">Oferta</div>
+                </div>
+                <div class="product-info">
+                    <h3>Smartphone Galaxy</h3>
+                    <div class="product-category">Electrónicos</div>
+                    <div class="product-description">Smartphone de última generación con cámara profesional.</div>
+                    <div class="product-price">
+                        <span class="current-price">$599.99</span>
+                        <span class="old-price">$699.99</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart">Agregar al Carrito</button>
+                        <button class="wishlist-btn"><i class="fas fa-heart"></i></button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image">
+                    <i class="fas fa-home"></i>
+                </div>
+                <div class="product-info">
+                    <h3>Lámpara de Mesa</h3>
+                    <div class="product-category">Hogar y Jardín</div>
+                    <div class="product-description">Lámpara elegante con diseño moderno y luz ajustable.</div>
+                    <div class="product-price">
+                        <span class="current-price">$89.99</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart">Agregar al Carrito</button>
+                        <button class="wishlist-btn"><i class="fas fa-heart"></i></button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image">
+                    <i class="fas fa-dumbbell"></i>
+                    <div class="product-badge">Popular</div>
+                </div>
+                <div class="product-info">
+                    <h3>Set de Pesas</h3>
+                    <div class="product-category">Deportes</div>
+                    <div class="product-description">Set completo de pesas ajustables para entrenamiento en casa.</div>
+                    <div class="product-price">
+                        <span class="current-price">$199.99</span>
+                        <span class="old-price">$249.99</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart">Agregar al Carrito</button>
+                        <button class="wishlist-btn"><i class="fas fa-heart"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="caracteristicas" class="features-section">
+        <h2>¿Por Qué Elegirnos?</h2>
+        <div class="features-grid">
+            <div class="feature-item">
+                <i class="fas fa-shipping-fast"></i>
+                <h3>Envío Gratis</h3>
+                <p>En pedidos superiores a $50 con entrega en 24-48 horas.</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Compra Segura</h3>
+                <p>Transacciones 100% seguras con encriptación SSL de nivel bancario.</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-undo"></i>
+                <h3>Devolución Fácil</h3>
+                <p>30 días para devoluciones sin preguntas y reembolso completo.</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-headset"></i>
+                <h3>Soporte 24/7</h3>
+                <p>Atención al cliente disponible las 24 horas del día, los 7 días de la semana.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section id="newsletter" class="newsletter-section">
+        <h2>¡Mantente Informado!</h2>
+        <p>Suscríbete a nuestro newsletter y recibe ofertas exclusivas y novedades</p>
+        <form class="newsletter-form">
+            <input type="email" class="newsletter-input" placeholder="Tu correo electrónico" required>
+            <button type="submit" class="newsletter-btn">Suscribirse</button>
+        </form>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contacto" class="section">
+        <h2>Contacto</h2>
+        <div class="contact-content">
+            <div class="contact-info">
+                <h3>Información de Contacto</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Av. Comercial 123, Zona Centro</p>
+                <p><i class="fas fa-phone"></i> (555) 123-4567</p>
+                <p><i class="fas fa-envelope"></i> info@shopmax.com</p>
+                <p><i class="fas fa-clock"></i> Lunes a Domingo: 09:00 - 21:00</p>
+                <p><i class="fas fa-globe"></i> www.shopmax.com</p>
+                
+                <h3 style="margin-top: 2rem;">Información de la Tienda</h3>
+                <p><strong>Horarios de Atención:</strong> 24/7 online</p>
+                <p><strong>Envíos:</strong> Lunes a Sábado</p>
+                <p><strong>Devoluciones:</strong> 30 días hábiles</p>
+                <p><strong>Garantía:</strong> 1 año en productos electrónicos</p>
+            </div>
+            
+            <div class="contact-form">
+                <h3>Envíanos un Mensaje</h3>
+                <form>
+                    <div class="form-group">
+                        <label for="name">Nombre Completo</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Teléfono</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Asunto</label>
+                        <select id="subject" name="subject" required>
+                            <option value="">Seleccionar asunto</option>
+                            <option value="consulta">Consulta General</option>
+                            <option value="producto">Información de Producto</option>
+                            <option value="envio">Consulta de Envío</option>
+                            <option value="devolucion">Devolución o Cambio</option>
+                            <option value="facturacion">Facturación</option>
+                            <option value="sugerencia">Sugerencia o Reclamo</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="order">Número de Pedido (opcional)</label>
+                        <input type="text" id="order" name="order" placeholder="Si tienes un pedido específico">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Mensaje</label>
+                        <textarea id="message" name="message" rows="4" placeholder="Describe tu consulta o solicitud..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Enviar Mensaje</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <h3>ShopMax</h3>
+            <p>Tu tienda online de confianza con los mejores productos</p>
+            <p>Av. Comercial 123, Zona Centro | (555) 123-4567</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+            <p style="margin-top: 2rem; color: #95a5a6;">&copy; 2024 ShopMax. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission handling
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                if (this.classList.contains('newsletter-form')) {
+                    alert('¡Gracias por suscribirte! Te enviaremos las mejores ofertas.');
+                } else {
+                    alert('¡Gracias por tu mensaje! Te contactaremos pronto.');
+                }
+            });
+        });
+
+        // Add hover effect to category cards
+        document.querySelectorAll('.category-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Add bounce in animation to product cards
+        document.querySelectorAll('.product-card').forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.1}s`;
+            card.classList.add('bounce-in');
+        });
+
+        // Add hover effect to product cards
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Add to cart functionality
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function() {
+                const cartCount = document.querySelector('.cart-count');
+                let currentCount = parseInt(cartCount.textContent);
+                cartCount.textContent = currentCount + 1;
+                
+                // Change button text temporarily
+                const originalText = this.textContent;
+                this.textContent = '¡Agregado!';
+                this.style.background = '#27ae60';
+                
+                setTimeout(() => {
+                    this.textContent = originalText;
+                    this.style.background = '#9b59b6';
+                }, 2000);
+            });
+        });
+
+        // Wishlist functionality
+        document.querySelectorAll('.wishlist-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                this.style.background = '#e74c3c';
+                this.style.borderColor = '#e74c3c';
+                this.style.color = 'white';
+                
+                // Change icon to filled heart
+                const icon = this.querySelector('i');
+                icon.classList.remove('fa-heart');
+                icon.classList.add('fas', 'fa-heart');
+            });
+        });
+    </script>
+</body>
+</html>
+
+

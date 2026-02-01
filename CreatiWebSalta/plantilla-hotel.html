@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Luxury - Plantilla de Ejemplo</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1a1a1a;
+            --secondary-color: #c8a97e;
+            --accent-color: #8b7355;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --white: #ffffff;
+            --gray-light: #f8f8f8;
+            --gold: #d4af37;
+        }
+
+        body {
+            font-family: 'Playfair Display', serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--white);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gold);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                        url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            color: var(--white);
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            font-weight: 400;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--gold);
+            font-weight: 300;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 0;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: var(--gold);
+            color: var(--primary-color);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--text-dark);
+            font-weight: 400;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Rooms Section */
+        .rooms {
+            background: var(--gray-light);
+        }
+
+        .rooms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .room-card {
+            background: var(--white);
+            border-radius: 0;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .room-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .room-image {
+            height: 250px;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 3rem;
+        }
+
+        .room-content {
+            padding: 2rem;
+        }
+
+        .room-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .room-description {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .room-features {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-tag {
+            background: var(--gray-light);
+            color: var(--text-dark);
+            padding: 0.5rem 1rem;
+            border-radius: 0;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .room-price {
+            font-size: 1.8rem;
+            color: var(--gold);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .book-btn {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 12px 30px;
+            border: none;
+            border-radius: 0;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            width: 100%;
+        }
+
+        .book-btn:hover {
+            background: var(--gold);
+            color: var(--primary-color);
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-item {
+            text-align: center;
+            padding: 2rem;
+            background: var(--white);
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+
+        .service-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .service-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .service-description {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            background: var(--gray-light);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 3rem;
+        }
+
+        .gallery-item {
+            height: 200px;
+            background: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-form {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--white);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 0;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            background: var(--gold);
+            color: var(--primary-color);
+            padding: 15px 40px;
+            border: none;
+            border-radius: 0;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .submit-btn:hover {
+            background: var(--white);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--gold);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: var(--text-light);
+            text-decoration: none;
+            line-height: 1.6;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            color: var(--white);
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--gold);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .rooms-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">LUXURY HOTEL</div>
+            <ul class="nav-links">
+                <li><a href="#home">Inicio</a></li>
+                <li><a href="#rooms">Habitaciones</a></li>
+                <li><a href="#services">Servicios</a></li>
+                <li><a href="#gallery">Galería</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content container">
+            <h1>Bienvenido al Luxury Hotel</h1>
+            <p class="hero-subtitle">Experiencia de lujo incomparable</p>
+            <p class="hero-description">
+                Descubre el confort y la elegancia en el corazón de la ciudad. 
+                Nuestras habitaciones de lujo y servicios premium te harán sentir 
+                como en casa.
+            </p>
+            <div class="cta-buttons">
+                <a href="#rooms" class="btn btn-primary">Ver Habitaciones</a>
+                <a href="#contact" class="btn btn-secondary">Reservar Ahora</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rooms Section -->
+    <section id="rooms" class="rooms">
+        <div class="container">
+            <h2 class="section-title">Nuestras Habitaciones</h2>
+            <p class="section-subtitle">
+                Cada habitación está diseñada para ofrecerte la máxima comodidad 
+                y elegancia durante tu estadía.
+            </p>
+            <div class="rooms-grid">
+                <!-- Room 1 -->
+                <div class="room-card">
+                    <div class="room-image">
+                        <i class="fas fa-bed"></i>
+                    </div>
+                    <div class="room-content">
+                        <h3 class="room-title">Habitación Deluxe</h3>
+                        <p class="room-description">
+                            Habitación espaciosa con vista a la ciudad, cama king-size, 
+                            baño privado y todas las comodidades modernas.
+                        </p>
+                        <div class="room-features">
+                            <span class="feature-tag">WiFi Gratis</span>
+                            <span class="feature-tag">TV 4K</span>
+                            <span class="feature-tag">Minibar</span>
+                        </div>
+                        <div class="room-price">$150/noche</div>
+                        <button class="book-btn">Reservar Ahora</button>
+                    </div>
+                </div>
+
+                <!-- Room 2 -->
+                <div class="room-card">
+                    <div class="room-image">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <div class="room-content">
+                        <h3 class="room-title">Suite Presidencial</h3>
+                        <p class="room-description">
+                            Nuestra suite más exclusiva con sala de estar separada, 
+                            jacuzzi privado y vista panorámica a la ciudad.
+                        </p>
+                        <div class="room-features">
+                            <span class="feature-tag">Jacuzzi</span>
+                            <span class="feature-tag">Sala Privada</span>
+                            <span class="feature-tag">Servicio 24h</span>
+                        </div>
+                        <div class="room-price">$350/noche</div>
+                        <button class="book-btn">Reservar Ahora</button>
+                    </div>
+                </div>
+
+                <!-- Room 3 -->
+                <div class="room-card">
+                    <div class="room-image">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <div class="room-content">
+                        <h3 class="room-title">Habitación Familiar</h3>
+                        <p class="room-description">
+                            Habitación perfecta para familias con dos camas dobles, 
+                            espacio amplio y baño compartido.
+                        </p>
+                        <div class="room-features">
+                            <span class="feature-tag">2 Camas Dobles</span>
+                            <span class="feature-tag">Espacio Familiar</span>
+                            <span class="feature-tag">WiFi Gratis</span>
+                        </div>
+                        <div class="room-price">$200/noche</div>
+                        <button class="book-btn">Reservar Ahora</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container">
+            <h2 class="section-title">Servicios Premium</h2>
+            <p class="section-subtitle">
+                Disfruta de nuestros servicios de primera clase diseñados para 
+                hacer de tu estadía una experiencia inolvidable.
+            </p>
+            <div class="services-grid">
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3 class="service-title">Restaurante Gourmet</h3>
+                    <p class="service-description">
+                        Disfruta de la mejor gastronomía local e internacional 
+                        en nuestro restaurante de 5 estrellas.
+                    </p>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fas fa-spa"></i>
+                    </div>
+                    <h3 class="service-title">Spa & Wellness</h3>
+                    <p class="service-description">
+                        Relájate y rejuvenece en nuestro spa con tratamientos 
+                        profesionales y masajes terapéuticos.
+                    </p>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fas fa-dumbbell"></i>
+                    </div>
+                    <h3 class="service-title">Gimnasio 24h</h3>
+                    <p class="service-description">
+                        Mantén tu rutina de ejercicios en nuestro gimnasio 
+                        completamente equipado y abierto 24 horas.
+                    </p>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fas fa-swimming-pool"></i>
+                    </div>
+                    <h3 class="service-title">Piscina Infinity</h3>
+                    <p class="service-description">
+                        Nada en nuestra piscina infinity con vista panorámica 
+                        y área de descanso exclusiva.
+                    </p>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <h3 class="service-title">Valet Parking</h3>
+                    <p class="service-description">
+                        Servicio de valet parking gratuito para todos nuestros 
+                        huéspedes con seguridad 24 horas.
+                    </p>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fas fa-concierge-bell"></i>
+                    </div>
+                    <h3 class="service-title">Concierge 24h</h3>
+                    <p class="service-description">
+                        Nuestro equipo de concierge está disponible 24 horas 
+                        para asistirte con cualquier necesidad.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <h2 class="section-title">Galería de Imágenes</h2>
+            <p class="section-subtitle">
+                Explora las instalaciones y espacios de nuestro hotel a través 
+                de nuestra galería de imágenes.
+            </p>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <i class="fas fa-hotel"></i>
+                </div>
+                <div class="gallery-item">
+                    <i class="fas fa-bed"></i>
+                </div>
+                <div class="gallery-item">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <div class="gallery-item">
+                    <i class="fas fa-spa"></i>
+                </div>
+                <div class="gallery-item">
+                    <i class="fas fa-swimming-pool"></i>
+                </div>
+                <div class="gallery-item">
+                    <i class="fas fa-dumbbell"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Reserva tu Estadia</h2>
+            <div class="contact-content">
+                <p style="margin-bottom: 3rem; font-size: 1.1rem; opacity: 0.9;">
+                    Completa el formulario para hacer tu reserva o contactarnos 
+                    para cualquier consulta sobre nuestros servicios.
+                </p>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Nombre Completo</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Teléfono</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="room-type">Tipo de Habitación</label>
+                        <select id="room-type" name="room-type" required>
+                            <option value="">Selecciona una opción</option>
+                            <option value="deluxe">Habitación Deluxe</option>
+                            <option value="suite">Suite Presidencial</option>
+                            <option value="family">Habitación Familiar</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="check-in">Fecha de Llegada</label>
+                        <input type="date" id="check-in" name="check-in" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="check-out">Fecha de Salida</label>
+                        <input type="date" id="check-out" name="check-out" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="guests">Número de Huéspedes</label>
+                        <input type="number" id="guests" name="guests" min="1" max="4" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Mensaje Especial</label>
+                        <textarea id="message" name="message" placeholder="Solicitudes especiales o comentarios..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Confirmar Reserva</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Luxury Hotel</h3>
+                    <p>
+                        Tu destino de lujo en el corazón de la ciudad. 
+                        Ofrecemos la mejor experiencia hotelera con servicios 
+                        premium y atención personalizada.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <p>📍 Calle Principal 123, Ciudad</p>
+                    <p>📞 +1 (555) 123-4567</p>
+                    <p>✉️ info@luxuryhotel.com</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Horarios</h3>
+                    <p>Check-in: 3:00 PM</p>
+                    <p>Check-out: 11:00 AM</p>
+                    <p>Recepción: 24 horas</p>
+                </div>
+            </div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+            <p>&copy; 2024 Luxury Hotel. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+</body>
+</html>
+

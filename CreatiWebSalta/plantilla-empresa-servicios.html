@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechSolutions - Plantilla de Ejemplo</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #3b82f6;
+            --accent-color: #06b6d4;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --white: #ffffff;
+            --gray-light: #f8fafc;
+            --blue-light: #dbeafe;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--white);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(30, 58, 138, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--blue-light);
+            font-weight: 300;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--accent-color);
+            color: var(--white);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Services Section */
+        .services {
+            background: var(--gray-light);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .service-description {
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-features li {
+            padding: 0.5rem 0;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .service-features li:before {
+            content: '✓';
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .learn-more {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .learn-more:hover {
+            color: var(--primary-color);
+        }
+
+        /* About Section */
+        .about {
+            background: var(--white);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .about-image {
+            height: 400px;
+            background: var(--blue-light);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 4rem;
+        }
+
+        /* Team Section */
+        .team {
+            background: var(--gray-light);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .team-member {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .member-image {
+            height: 250px;
+            background: var(--blue-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 4rem;
+        }
+
+        .member-info {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .member-name {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .member-position {
+            color: var(--secondary-color);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .member-description {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .member-social {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .member-social a {
+            color: var(--text-light);
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        .member-social a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            background: var(--white);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: var(--gray-light);
+            border-radius: 12px;
+            padding: 2rem;
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .testimonial-text {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background: var(--blue-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+        .author-info h4 {
+            color: var(--text-dark);
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        .author-info p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-form {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 3rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--white);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            background: var(--accent-color);
+            color: var(--white);
+            padding: 15px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: var(--secondary-color);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: var(--text-light);
+            text-decoration: none;
+            line-height: 1.6;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            color: var(--white);
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">TechSolutions</div>
+            <ul class="nav-links">
+                <li><a href="#home">Inicio</a></li>
+                <li><a href="#services">Servicios</a></li>
+                <li><a href="#about">Sobre Nosotros</a></li>
+                <li><a href="#team">Equipo</a></li>
+                <li><a href="#testimonials">Testimonios</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content container">
+            <h1>Soluciones Tecnológicas Innovadoras</h1>
+            <p class="hero-subtitle">Transformamos ideas en realidad digital</p>
+            <p class="hero-description">
+                Somos una empresa líder en desarrollo de software y consultoría 
+                tecnológica, especializada en crear soluciones personalizadas 
+                que impulsan el crecimiento de tu negocio.
+            </p>
+            <div class="cta-buttons">
+                <a href="#services" class="btn btn-primary">Nuestros Servicios</a>
+                <a href="#contact" class="btn btn-secondary">Contáctanos</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Nuestros Servicios</h2>
+            <p class="section-subtitle">
+                Ofrecemos una amplia gama de servicios tecnológicos diseñados 
+                para satisfacer las necesidades específicas de tu empresa.
+            </p>
+            <div class="services-grid">
+                <!-- Service 1 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="service-title">Desarrollo de Software</h3>
+                    <p class="service-description">
+                        Creamos aplicaciones web y móviles personalizadas utilizando 
+                        las últimas tecnologías y mejores prácticas de desarrollo.
+                    </p>
+                    <ul class="service-features">
+                        <li>Aplicaciones Web Responsivas</li>
+                        <li>Apps Móviles Nativas</li>
+                        <li>APIs y Microservicios</li>
+                        <li>Integración de Sistemas</li>
+                    </ul>
+                    <a href="#" class="learn-more">Saber más →</a>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3 class="service-title">Consultoría en la Nube</h3>
+                    <p class="service-description">
+                        Te ayudamos a migrar y optimizar tu infraestructura en la nube 
+                        para mejorar la eficiencia y reducir costos.
+                    </p>
+                    <ul class="service-features">
+                        <li>Migración a la Nube</li>
+                        <li>Arquitectura Cloud</li>
+                        <li>Optimización de Costos</li>
+                        <li>Seguridad y Compliance</li>
+                    </ul>
+                    <a href="#" class="learn-more">Saber más →</a>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="service-title">Ciberseguridad</h3>
+                    <p class="service-description">
+                        Protegemos tu empresa con soluciones de seguridad integrales 
+                        que mantienen tus datos y sistemas a salvo de amenazas.
+                    </p>
+                    <ul class="service-features">
+                        <li>Auditorías de Seguridad</li>
+                        <li>Implementación de Firewalls</li>
+                        <li>Monitoreo 24/7</li>
+                        <li>Capacitación del Personal</li>
+                    </ul>
+                    <a href="#" class="learn-more">Saber más →</a>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="service-title">Análisis de Datos</h3>
+                    <p class="service-description">
+                        Convertimos tus datos en insights accionables que te ayudan 
+                        a tomar decisiones informadas y mejorar el rendimiento.
+                    </p>
+                    <ul class="service-features">
+                        <li>Big Data Analytics</li>
+                        <li>Machine Learning</li>
+                        <li>Dashboards Interactivos</li>
+                        <li>Reportes Automatizados</li>
+                    </ul>
+                    <a href="#" class="learn-more">Saber más →</a>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="service-title">Outsourcing IT</h3>
+                    <p class="service-description">
+                        Proporcionamos equipos de desarrollo dedicados y soporte 
+                        técnico para complementar tu equipo interno.
+                    </p>
+                    <ul class="service-features">
+                        <li>Equipos Dedicados</li>
+                        <li>Soporte Técnico 24/7</li>
+                        <li>Mantenimiento Preventivo</li>
+                        <li>Capacitación Continua</li>
+                    </ul>
+                    <a href="#" class="learn-more">Saber más →</a>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="service-title">Transformación Digital</h3>
+                    <p class="service-description">
+                        Guiamos a tu empresa en su viaje de transformación digital 
+                        para mantenerse competitiva en el mercado actual.
+                    </p>
+                    <ul class="service-features">
+                        <li>Estrategia Digital</li>
+                        <li>Automatización de Procesos</li>
+                        <li>Gestión del Cambio</li>
+                        <li>Innovación Tecnológica</li>
+                    </ul>
+                    <a href="#" class="learn-more">Saber más →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">Sobre Nosotros</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Nuestra Misión</h3>
+                    <p>
+                        En TechSolutions, nos apasiona la tecnología y su capacidad 
+                        para transformar negocios. Nuestro equipo de expertos 
+                        trabaja incansablemente para crear soluciones innovadoras 
+                        que resuelvan los desafíos más complejos de nuestros clientes.
+                    </p>
+                    <p>
+                        Con más de 10 años de experiencia en la industria, hemos 
+                        ayudado a cientos de empresas a alcanzar sus objetivos 
+                        tecnológicos y mantenerse a la vanguardia de la innovación.
+                    </p>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-number">500+</div>
+                            <div class="stat-label">Proyectos Completados</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">200+</div>
+                            <div class="stat-label">Clientes Satisfechos</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">50+</div>
+                            <div class="stat-label">Expertos en Tecnología</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">10+</div>
+                            <div class="stat-label">Años de Experiencia</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <i class="fas fa-laptop-code"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="team">
+        <div class="container">
+            <h2 class="section-title">Nuestro Equipo</h2>
+            <p class="section-subtitle">
+                Conoce a los profesionales apasionados que hacen posible 
+                la excelencia en cada proyecto que emprendemos.
+            </p>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-image">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="member-info">
+                        <h3 class="member-name">Carlos Rodríguez</h3>
+                        <p class="member-position">CEO & Fundador</p>
+                        <p class="member-description">
+                            Visionario tecnológico con más de 15 años de experiencia 
+                            en desarrollo de software y gestión de empresas tecnológicas.
+                        </p>
+                        <div class="member-social">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-image">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="member-info">
+                        <h3 class="member-name">Ana Martínez</h3>
+                        <p class="member-position">CTO</p>
+                        <p class="member-description">
+                            Experta en arquitectura de software y tecnologías emergentes. 
+                            Lidera nuestro equipo de desarrollo e innovación.
+                        </p>
+                        <div class="member-social">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-image">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="member-info">
+                        <h3 class="member-name">Miguel Torres</h3>
+                        <p class="member-position">Director de Proyectos</p>
+                        <p class="member-description">
+                            Especialista en metodologías ágiles y gestión de equipos. 
+                            Asegura la entrega exitosa de todos nuestros proyectos.
+                        </p>
+                        <div class="member-social">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-image">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="member-info">
+                        <h3 class="member-name">Laura Sánchez</h3>
+                        <p class="member-position">Directora de Diseño UX/UI</p>
+                        <p class="member-description">
+                            Diseñadora creativa enfocada en crear experiencias de usuario 
+                            excepcionales y interfaces intuitivas.
+                        </p>
+                        <div class="member-social">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-dribbble"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <h2 class="section-title">Lo que Dicen Nuestros Clientes</h2>
+            <p class="section-subtitle">
+                Descubre por qué las empresas confían en nosotros para sus 
+                necesidades tecnológicas más críticas.
+            </p>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">
+                        "TechSolutions transformó completamente nuestra operación 
+                        digital. Su equipo entregó un sistema que superó nuestras 
+                        expectativas y nos ayudó a aumentar la eficiencia en un 40%."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>María González</h4>
+                            <p>CEO, InnovateCorp</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-text">
+                        "La consultoría en la nube de TechSolutions nos permitió 
+                        reducir costos de infraestructura en un 60% mientras 
+                        mejorábamos el rendimiento de nuestras aplicaciones."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Roberto Silva</h4>
+                            <p>Director IT, DataFlow</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-text">
+                        "Excelente trabajo en nuestro proyecto de e-commerce. 
+                        El equipo fue profesional, comunicativo y entregó 
+                        exactamente lo que necesitábamos en tiempo récord."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Carmen Ruiz</h4>
+                            <p>Fundadora, ShopOnline</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Contáctanos</h2>
+            <div class="contact-content">
+                <p style="margin-bottom: 3rem; font-size: 1.1rem; opacity: 0.9;">
+                    ¿Listo para transformar tu negocio con tecnología? 
+                    Cuéntanos sobre tu proyecto y te ayudaremos a hacerlo realidad.
+                </p>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Nombre Completo</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="company">Empresa</label>
+                        <input type="text" id="company" name="company" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Teléfono</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="service">Servicio de Interés</label>
+                        <select id="service" name="service" required>
+                            <option value="">Selecciona un servicio</option>
+                            <option value="development">Desarrollo de Software</option>
+                            <option value="cloud">Consultoría en la Nube</option>
+                            <option value="security">Ciberseguridad</option>
+                            <option value="analytics">Análisis de Datos</option>
+                            <option value="outsourcing">Outsourcing IT</option>
+                            <option value="transformation">Transformación Digital</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="budget">Presupuesto Estimado</label>
+                        <select id="budget" name="budget" required>
+                            <option value="">Selecciona un rango</option>
+                            <option value="small">$5,000 - $25,000</option>
+                            <option value="medium">$25,000 - $100,000</option>
+                            <option value="large">$100,000+</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="timeline">Timeline del Proyecto</label>
+                        <select id="timeline" name="timeline" required>
+                            <option value="">Selecciona un timeline</option>
+                            <option value="urgent">Urgente (1-3 meses)</option>
+                            <option value="normal">Normal (3-6 meses)</option>
+                            <option value="flexible">Flexible (6+ meses)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Descripción del Proyecto</label>
+                        <textarea id="description" name="description" placeholder="Cuéntanos sobre tu proyecto, objetivos y requisitos específicos..." required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Enviar Consulta</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>TechSolutions</h3>
+                    <p>
+                        Tu socio tecnológico de confianza para transformar 
+                        ideas en soluciones digitales innovadoras. Impulsamos 
+                        el crecimiento de tu negocio con tecnología de vanguardia.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h3>Servicios</h3>
+                    <p>Desarrollo de Software</p>
+                    <p>Consultoría en la Nube</p>
+                    <p>Ciberseguridad</p>
+                    <p>Análisis de Datos</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <p>📍 Av. Tecnología 456, Ciudad</p>
+                    <p>📞 +1 (555) 987-6543</p>
+                    <p>✉️ info@techsolutions.com</p>
+                </div>
+            </div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+            </div>
+            <p>&copy; 2024 TechSolutions. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+</body>
+</html>
+
+

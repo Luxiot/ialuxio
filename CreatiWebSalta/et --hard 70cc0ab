@@ -1,0 +1,10 @@
+[33m3f69dad[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m 🔧 Arreglar guardado de funcionalidades en chatbot - Las funcionalidades ahora se incluyen correctamente en WhatsApp
+[33mf7d9dcc[m �� Actualizar precios del chatbot - Rango mínimo desde $70.000 para proyectos más accesibles
+[33m51ba7f5[m 🔧 Arreglar chatbot: Debug y corrección de funcionalidades para WhatsApp
+[33m70cc0ab[m �� Sitio web completo con chatbot IA, WhatsApp flotante y todas las secciones - Servicios, Portfolio y Contacto funcionando perfectamente
+[33m4367d5d[m �� Restaurar botón de WhatsApp flotante y chatbot completo - Botón verde arriba del chatbot con animaciones
+[33m5ea2397[m  Mover WhatsApp del header a posición flotante cerca del chatbot - Botón flotante abajo del chatbot con animaciones
+[33m4d769b8[m �� WhatsApp arriba en header con animaciones - Botón fijo arriba a la derecha que se mueve igual que el chatbot
+[33mb89a585[m 🎯 Mover WhatsApp al header y restaurar navegación completa - Botón fijo arriba a la derecha con animaciones
+[33mf9f1dfe[m 🔧 Corregir posicionamiento y navegación - Menú móvil hamburguesa añadido
+[33mb7acefb[m �� Restaurar botón de WhatsApp premium y chatbot completo - Funcionalidad completa restaurada

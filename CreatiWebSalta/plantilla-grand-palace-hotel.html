@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grand Palace Hotel - Lujo y Elegancia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(25, 25, 112, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            letter-spacing: 2px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        nav a:hover {
+            color: #ffd700;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(25, 25, 112, 0.6), rgba(0, 0, 0, 0.4)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%23191970" width="1200" height="800"/><rect fill="%23ffd700" x="400" y="100" width="400" height="300" rx="20"/><rect fill="%23ffffff" x="450" y="150" width="100" height="100" rx="10"/><rect fill="%23ffffff" x="600" y="150" width="100" height="100" rx="10"/><rect fill="%23228b22" x="0" y="700" width="1200" height="100"/></svg>');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, 
+                rgba(255, 215, 0, 0.1) 0%, 
+                rgba(25, 25, 112, 0.3) 50%, 
+                rgba(255, 215, 0, 0.1) 100%);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.7; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #fff;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            color: #ffd700;
+            font-style: italic;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.9s both;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            color: #191970;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #ffd700;
+            border: 2px solid #ffd700;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        /* Sections */
+        .section {
+            padding: 100px 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section h2 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            color: #191970;
+            text-shadow: 2px 2px 4px rgba(255, 215, 0, 0.3);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.3rem;
+            margin-bottom: 4rem;
+            color: #666;
+            font-style: italic;
+        }
+
+        /* Rooms Section */
+        .rooms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .room-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .room-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+            border-color: #ffd700;
+        }
+
+        .room-image {
+            height: 250px;
+            background: linear-gradient(45deg, #191970, #4169e1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .room-content {
+            padding: 2rem;
+        }
+
+        .room-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #191970;
+        }
+
+        .room-content p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .room-price {
+            font-size: 2rem;
+            color: #ffd700;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .room-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .room-features span {
+            background: rgba(25, 25, 112, 0.1);
+            color: #191970;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(25, 25, 112, 0.2);
+        }
+
+        .book-btn {
+            width: 100%;
+            background: linear-gradient(45deg, #191970, #4169e1);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .book-btn:hover {
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            color: #191970;
+            transform: translateY(-2px);
+        }
+
+        /* Services Section */
+        .services {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .service-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            border-color: #ffd700;
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #ffd700;
+        }
+
+        .service-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #191970;
+        }
+
+        .service-item p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Gallery Section */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            height: 250px;
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-item:nth-child(1) { background: linear-gradient(45deg, #191970, #4169e1); }
+        .gallery-item:nth-child(2) { background: linear-gradient(45deg, #ffd700, #ffed4e); }
+        .gallery-item:nth-child(3) { background: linear-gradient(45deg, #8b4513, #cd853f); }
+        .gallery-item:nth-child(4) { background: linear-gradient(45deg, #228b22, #32cd32); }
+        .gallery-item:nth-child(5) { background: linear-gradient(45deg, #dc143c, #ff6347); }
+        .gallery-item:nth-child(6) { background: linear-gradient(45deg, #4b0082, #9370db); }
+
+        .gallery-item::before {
+            content: '🏰';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, #191970 0%, #4169e1 100%);
+            color: white;
+        }
+
+        .contact h2 {
+            color: #ffd700;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 3rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #ffd700;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.3);
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            color: #191970;
+            border: none;
+            padding: 15px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 215, 0, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: #191970;
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #ffd700;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            line-height: 1.6;
+        }
+
+        .footer-section a:hover {
+            color: #ffd700;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 215, 0, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffd700;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .social-link:hover {
+            background: #ffd700;
+            color: #191970;
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            border-top: 1px solid rgba(255, 215, 0, 0.2);
+            padding-top: 2rem;
+            color: #ccc;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .rooms-grid,
+            .services-grid,
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-form {
+                padding: 2rem;
+                margin: 0 1rem;
+            }
+            
+            .footer-info {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Grand Palace Hotel</div>
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#habitaciones">Habitaciones</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#galeria">Galería</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="inicio" class="hero">
+            <div class="hero-content">
+                <h1>Grand Palace Hotel</h1>
+                <p>Donde el lujo se encuentra con la tradición</p>
+                <p class="hero-subtitle">Una experiencia hotelera sin igual en el corazón de la ciudad</p>
+                <div class="cta-buttons">
+                    <a href="#habitaciones" class="btn btn-primary">Ver Habitaciones</a>
+                    <a href="#contacto" class="btn btn-secondary">Reservar Ahora</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="habitaciones" class="section">
+            <div class="container">
+                <h2>Nuestras Habitaciones</h2>
+                <p class="section-subtitle">Espacios diseñados para tu máximo confort y elegancia</p>
+                
+                <div class="rooms-grid">
+                    <div class="room-card">
+                        <div class="room-image">🛏️</div>
+                        <div class="room-content">
+                            <h3>Habitación Estándar</h3>
+                            <p>Habitación elegante con todas las comodidades necesarias para una estancia confortable.</p>
+                            <div class="room-features">
+                                <span>WiFi Gratis</span>
+                                <span>TV HD</span>
+                                <span>Aire Acondicionado</span>
+                            </div>
+                            <div class="room-price">$150/noche</div>
+                            <button class="book-btn">Reservar Ahora</button>
+                        </div>
+                    </div>
+
+                    <div class="room-card">
+                        <div class="room-image">👑</div>
+                        <div class="room-content">
+                            <h3>Suite Ejecutiva</h3>
+                            <p>Suite de lujo con sala de estar separada y vistas panorámicas de la ciudad.</p>
+                            <div class="room-features">
+                                <span>WiFi Gratis</span>
+                                <span>TV HD</span>
+                                <span>Minibar</span>
+                                <span>Vista Ciudad</span>
+                            </div>
+                            <div class="room-price">$300/noche</div>
+                            <button class="book-btn">Reservar Ahora</button>
+                        </div>
+                    </div>
+
+                    <div class="room-card">
+                        <div class="room-image">🏰</div>
+                        <div class="room-content">
+                            <h3>Suite Presidencial</h3>
+                            <p>La máxima expresión de lujo con servicios exclusivos y atención personalizada.</p>
+                            <div class="room-features">
+                                <span>WiFi Gratis</span>
+                                <span>TV HD</span>
+                                <span>Minibar Premium</span>
+                                <span>Vista Panorámica</span>
+                                <span>Servicio 24/7</span>
+                            </div>
+                            <div class="room-price">$500/noche</div>
+                            <button class="book-btn">Reservar Ahora</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="servicios" class="section services">
+            <div class="container">
+                <h2>Servicios Premium</h2>
+                <p class="section-subtitle">Disfruta de servicios exclusivos que harán de tu estancia algo inolvidable</p>
+                
+                <div class="services-grid">
+                    <div class="service-item">
+                        <div class="service-icon">🍽️</div>
+                        <h3>Restaurante Gourmet</h3>
+                        <p>Experiencia culinaria de primera clase con chefs internacionales y menús de temporada.</p>
+                    </div>
+
+                    <div class="service-item">
+                        <div class="service-icon">💆</div>
+                        <h3>Spa & Wellness</h3>
+                        <p>Relájate en nuestro spa de lujo con tratamientos personalizados y masajes terapéuticos.</p>
+                    </div>
+
+                    <div class="service-item">
+                        <div class="service-icon">🏊</div>
+                        <h3>Piscina Infinito</h3>
+                        <p>Nada en nuestra piscina de borde infinito con vistas espectaculares de la ciudad.</p>
+                    </div>
+
+                    <div class="service-item">
+                        <div class="service-icon">🚗</div>
+                        <h3>Valet Parking</h3>
+                        <p>Servicio de valet parking gratuito para todos nuestros huéspedes.</p>
+                    </div>
+
+                    <div class="service-item">
+                        <div class="service-icon">📱</div>
+                        <h3>Concierge 24/7</h3>
+                        <p>Nuestro equipo de concierge está disponible las 24 horas para atender todas tus necesidades.</p>
+                    </div>
+
+                    <div class="service-item">
+                        <div class="service-icon">🏋️</div>
+                        <h3>Gimnasio Premium</h3>
+                        <p>Mantén tu rutina de ejercicios en nuestro gimnasio equipado con tecnología de última generación.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="galeria" class="section">
+            <div class="container">
+                <h2>Galería de Imágenes</h2>
+                <p class="section-subtitle">Descubre la belleza y elegancia de nuestro hotel</p>
+                
+                <div class="gallery-grid">
+                    <div class="gallery-item"></div>
+                    <div class="gallery-item"></div>
+                    <div class="gallery-item"></div>
+                    <div class="gallery-item"></div>
+                    <div class="gallery-item"></div>
+                    <div class="gallery-item"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contacto" class="section contact">
+            <div class="container">
+                <h2>Reserva tu Estancia</h2>
+                <p class="section-subtitle">Contacta con nosotros para hacer tu reserva o consultar disponibilidad</p>
+                
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="nombre">Nombre Completo</label>
+                        <input type="text" id="nombre" name="nombre" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telefono">Teléfono</label>
+                        <input type="tel" id="telefono" name="telefono" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fecha-llegada">Fecha de Llegada</label>
+                        <input type="date" id="fecha-llegada" name="fecha-llegada" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fecha-salida">Fecha de Salida</label>
+                        <input type="date" id="fecha-salida" name="fecha-salida" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tipo-habitacion">Tipo de Habitación</label>
+                        <select id="tipo-habitacion" name="tipo-habitacion" required>
+                            <option value="">Selecciona una opción</option>
+                            <option value="estandar">Habitación Estándar</option>
+                            <option value="ejecutiva">Suite Ejecutiva</option>
+                            <option value="presidencial">Suite Presidencial</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="huespedes">Número de Huéspedes</label>
+                        <select id="huespedes" name="huespedes" required>
+                            <option value="">Selecciona una opción</option>
+                            <option value="1">1 Huésped</option>
+                            <option value="2">2 Huéspedes</option>
+                            <option value="3">3 Huéspedes</option>
+                            <option value="4">4 Huéspedes</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mensaje">Mensaje Adicional</label>
+                        <textarea id="mensaje" name="mensaje" rows="4" placeholder="Especificaciones especiales, solicitudes, etc."></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Enviar Reserva</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-info">
+                <div class="footer-section">
+                    <h3>Grand Palace Hotel</h3>
+                    <p>Donde el lujo se encuentra con la tradición. Una experiencia hotelera sin igual en el corazón de la ciudad.</p>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <p>📍 Av. Principal 123, Ciudad</p>
+                    <p>📞 +1 234 567 8900</p>
+                    <p>📧 info@grandpalacehotel.com</p>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Horarios</h3>
+                    <p>🏨 Check-in: 3:00 PM</p>
+                    <p>🚪 Check-out: 11:00 AM</p>
+                    <p>🍽️ Restaurante: 6:00 AM - 11:00 PM</p>
+                </div>
+            </div>
+
+            <div class="social-links">
+                <a href="#" class="social-link">📘</a>
+                <a href="#" class="social-link">📷</a>
+                <a href="#" class="social-link">🐦</a>
+                <a href="#" class="social-link">💼</a>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2025 Grand Palace Hotel. Todos los derechos reservados. | Diseñado con ❤️ para tu comodidad</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling para enlaces internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Formulario de reserva
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('¡Gracias por tu reserva! Nos pondremos en contacto contigo pronto para confirmar los detalles.');
+        });
+
+        // Botones de reserva de habitaciones
+        document.querySelectorAll('.book-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const roomName = this.closest('.room-card').querySelector('h3').textContent;
+                alert(`¡Excelente elección! Has seleccionado: ${roomName}\n\nSerás redirigido al formulario de reserva.`);
+                
+                // Scroll suave al formulario
+                document.getElementById('contacto').scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+
+        // Animación de entrada para elementos
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+
+        // Observar elementos para animación
+        document.querySelectorAll('.room-card, .service-item, .gallery-item').forEach(item => {
+            observer.observe(item);
+        });
+
+        // Header con efecto de scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(25, 25, 112, 0.98)';
+            } else {
+                header.style.background = 'rgba(25, 25, 112, 0.95)';
+            }
+        });
+    </script>
+</body>
+</html>
+
+

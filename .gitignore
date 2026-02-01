@@ -56,8 +56,8 @@ frontend/.pnp.js
 # Firebase
 .firebase/
 
-# CreatiWebSalta (repositorio aparte / otro lugar después)
-CreatiWebSalta/
+# CreatiWebSalta - ya se sube al repo (solo ignorar caché Firebase)
+CreatiWebSalta/.firebase/
 
 
 
