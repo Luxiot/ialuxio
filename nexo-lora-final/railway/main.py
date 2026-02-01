@@ -164,6 +164,15 @@ def _build_gemini_contents(user_message: str, context: List[dict]) -> list:
     return contents
 
 
+# Modelos Gemini a probar en orden (el primero que responda 200 se usa)
+GEMINI_MODELS = ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash-latest"]
+
+
+def _call_gemini_sync(model: str, body: dict, headers: dict) -> tuple[int, str]:
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
+    return _http_post_sync(url, headers, body)
+
+
 async def _call_gemini(user_message: str, context: List[dict]) -> Optional[str]:
     if not GEMINI_API_KEY:
         return None
@@ -173,28 +182,33 @@ async def _call_gemini(user_message: str, context: List[dict]) -> Optional[str]:
         "contents": contents,
         "generationConfig": {"maxOutputTokens": 1024, "temperature": 0.7},
     }
-    url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent"
     headers = {"x-goog-api-key": GEMINI_API_KEY, "Content-Type": "application/json"}
     loop = asyncio.get_event_loop()
-    status, raw = await loop.run_in_executor(None, lambda: _http_post_sync(url, headers, body))
-    if status != 200:
+    for model in GEMINI_MODELS:
+        status, raw = await loop.run_in_executor(
+            None, lambda m=model: _call_gemini_sync(m, body, headers)
+        )
+        if status != 200:
+            try:
+                print(f"[Gemini] {model} status={status} body={raw[:300]}")
+            except Exception:
+                print(f"[Gemini] {model} status={status}")
+            continue
         try:
-            print(f"[Gemini] status={status} body={raw[:500]}")
-        except Exception:
-            print(f"[Gemini] status={status}")
-        return None
-    try:
-        data = json.loads(raw)
-    except json.JSONDecodeError:
-        return None
-    candidates = data.get("candidates") or []
-    if not candidates:
-        print("[Gemini] respuesta sin candidates")
-        return None
-    parts = (candidates[0].get("content") or {}).get("parts") or []
-    if not parts:
-        return None
-    return (parts[0].get("text") or "").strip()
+            data = json.loads(raw)
+        except json.JSONDecodeError:
+            continue
+        candidates = data.get("candidates") or []
+        if not candidates:
+            continue
+        parts = (candidates[0].get("content") or {}).get("parts") or []
+        if not parts:
+            continue
+        text = (parts[0].get("text") or "").strip()
+        if text:
+            print(f"[Gemini] OK con modelo {model}")
+            return text
+    return None
 
 
 def generate_fallback_response(user_message: str, context: List[dict]) -> str:
