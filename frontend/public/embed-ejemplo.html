@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejemplo - Widget Luxio en tu web</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 600px; margin: 60px auto; padding: 20px; }
+    h1 { color: #333; }
+    p { color: #666; line-height: 1.6; }
+    code { background: #f1f3f5; padding: 2px 8px; border-radius: 4px; font-size: 14px; }
+    pre { background: #1e1e1e; color: #d4d4d4; padding: 20px; border-radius: 8px; overflow-x: auto; }
+  </style>
+</head>
+<body>
+  <h1>Tu página web</h1>
+  <p>Este es un ejemplo de cómo se ve tu página con el widget de chat Luxio integrado.</p>
+  <p>El botón de chat aparece abajo a la derecha. ¡Prueba hacer clic!</p>
+  
+  <h2>Cómo agregar el widget a tu web</h2>
+  <p>Copia y pega este código antes del cierre de <code>&lt;/body&gt;</code>:</p>
+  <pre><code>&lt;script 
+  src="/luxio-chat-widget.js" 
+  data-api-url="http://localhost:8001"
+  data-name="Luxio"
+&gt;&lt;/script&gt;</code></pre>
+  
+  <p><strong>Producción:</strong> Cambia <code>data-api-url</code> por la URL de tu API desplegada.</p>
+
+  <!-- Widget Luxio - Agregar esto a tu página -->
+  <script 
+    src="/luxio-chat-widget.js" 
+    data-api-url="http://localhost:8001"
+    data-name="Luxio"
+  ></script>
+</body>
+</html>

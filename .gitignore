@@ -1,0 +1,71 @@
+# Dependencias
+node_modules/
+venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Entornos virtuales
+venv/
+ENV/
+env/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Archivos de entorno
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Build
+frontend/build/
+frontend/dist/
+*.log
+
+# Modelos y datos grandes
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.ckpt
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Python
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# React
+frontend/.pnp
+frontend/.pnp.js
+
+# Firebase
+.firebase/
+
+# CreatiWebSalta (repositorio aparte / otro lugar después)
+CreatiWebSalta/
+
+
+
+
+
+
+
+
+
+
+

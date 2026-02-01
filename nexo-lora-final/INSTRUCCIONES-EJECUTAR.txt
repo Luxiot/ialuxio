@@ -1,0 +1,32 @@
+═══════════════════════════════════════════════════════════════
+  CÓMO EJECUTAR EL SERVIDOR CORRECTAMENTE
+═══════════════════════════════════════════════════════════════
+
+❌ ERROR COMÚN:
+   python main.py
+   → Esto usa el Python del sistema (sin FastAPI)
+
+✅ SOLUCIÓN CORRECTA:
+
+OPCIÓN 1: Usar el script .bat (MÁS FÁCIL)
+   → Doble clic en: ejecutar.bat
+
+OPCIÓN 2: Desde PowerShell/CMD
+   cd "C:\Users\Luxio\Desktop\ia luxio\nexo-lora-final"
+   .\venv\Scripts\python.exe main.py
+
+OPCIÓN 3: Activar entorno virtual primero
+   cd "C:\Users\Luxio\Desktop\ia luxio\nexo-lora-final"
+   .\venv\Scripts\activate.bat
+   python main.py
+
+═══════════════════════════════════════════════════════════════
+
+IMPORTANTE:
+- SIEMPRE usa: .\venv\Scripts\python.exe
+- NO uses solo: python (usa el del sistema)
+
+═══════════════════════════════════════════════════════════════
+
+
+

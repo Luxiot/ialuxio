@@ -1,0 +1,275 @@
+CIENCIAS NATURALES: BIOLOGÍA, FÍSICA Y QUÍMICA
+===============================================
+
+INTRODUCCIÓN:
+
+Las ciencias naturales estudian el mundo físico y natural, proporcionando información precisa sobre cómo funciona el universo, desde las partículas más pequeñas hasta los ecosistemas más grandes.
+
+BIOLOGÍA:
+
+1. DEFINICIÓN Y ÁMBITO
+   - Estudio de la vida y organismos vivos
+   - Desde moléculas hasta ecosistemas
+   - Diversidad de formas de vida
+   - Procesos vitales
+
+2. CÉLULAS - UNIDAD BÁSICA
+   - Células procariotas: Sin núcleo (bacterias)
+   - Células eucariotas: Con núcleo (plantas, animales, hongos)
+   - Organelos: Mitocondrias, cloroplastos, retículo endoplásmico
+   - División celular: Mitosis y meiosis
+
+3. GENÉTICA
+   - ADN: Ácido desoxirribonucleico, código genético
+   - Genes: Unidades de herencia
+   - Cromosomas: Estructuras que contienen ADN
+   - Herencia: Dominante, recesiva, codominante
+   - Mutaciones: Cambios en ADN
+
+4. EVOLUCIÓN
+   - Selección natural: Charles Darwin
+   - Adaptación: Cambios para sobrevivir
+   - Especiación: Formación de nuevas especies
+   - Evidencia: Fósiles, anatomía comparada, ADN
+   - Árbol de la vida: Relaciones evolutivas
+
+5. ECOLOGÍA
+   - Ecosistemas: Comunidades y su ambiente
+   - Cadenas alimentarias: Flujo de energía
+   - Ciclos biogeoquímicos: Carbono, nitrógeno, agua
+   - Biodiversidad: Variedad de vida
+   - Conservación: Protección de especies
+
+6. ANATOMÍA Y FISIOLOGÍA
+   - Sistemas del cuerpo: Digestivo, circulatorio, nervioso, respiratorio
+   - Órganos: Estructuras especializadas
+   - Homeostasis: Equilibrio interno
+   - Salud y enfermedad
+
+7. BOTÁNICA
+   - Fotosíntesis: Conversión de luz en energía
+   - Estructura de plantas: Raíces, tallos, hojas
+   - Reproducción: Sexual y asexual
+   - Clasificación: Plantas con y sin semillas
+
+8. ZOOLOGÍA
+   - Clasificación animal: Vertebrados e invertebrados
+   - Adaptaciones: Para diferentes ambientes
+   - Comportamiento: Instinto y aprendizaje
+   - Hábitats: Terrestre, acuático, aéreo
+
+9. MICROBIOLOGÍA
+   - Bacterias: Procariotas unicelulares
+   - Virus: Parásitos intracelulares
+   - Hongos: Descomponedores importantes
+   - Protistas: Organismos eucariotas diversos
+
+10. BIOTECNOLOGÍA
+    - Ingeniería genética: Modificación de ADN
+    - Clonación: Copias genéticas
+    - Terapia génica: Tratamiento de enfermedades
+    - Organismos modificados genéticamente (OMG)
+
+FÍSICA:
+
+11. DEFINICIÓN Y ÁMBITO
+    - Estudio de materia, energía, espacio y tiempo
+    - Leyes fundamentales del universo
+    - Desde partículas subatómicas hasta cosmos
+    - Matemáticas como lenguaje
+
+12. MECÁNICA CLÁSICA
+    - Movimiento: Posición, velocidad, aceleración
+    - Leyes de Newton: Inercia, fuerza, acción-reacción
+    - Gravedad: Fuerza de atracción
+    - Energía: Cinética y potencial
+    - Momentum: Cantidad de movimiento
+
+13. TERMODINÁMICA
+    - Temperatura: Medida de energía térmica
+    - Calor: Transferencia de energía térmica
+    - Leyes de la termodinámica: Conservación de energía
+    - Entropía: Desorden del sistema
+    - Máquinas térmicas: Conversión de calor en trabajo
+
+14. ELECTROMAGNETISMO
+    - Electricidad: Carga y corriente
+    - Magnetismo: Campos magnéticos
+    - Electromagnetismo: Unificación por Maxwell
+    - Ondas electromagnéticas: Luz, radio, rayos X
+    - Circuitos: Corriente, voltaje, resistencia
+
+15. ÓPTICA
+    - Luz: Onda electromagnética
+    - Reflexión: Rebote de luz
+    - Refracción: Cambio de dirección
+    - Lentes: Convergentes y divergentes
+    - Espectro: Colores y frecuencias
+
+16. FÍSICA CUÁNTICA
+    - Dualidad onda-partícula: Comportamiento dual
+    - Principio de incertidumbre: Heisenberg
+    - Superposición: Estados múltiples
+    - Entrelazamiento: Conexión cuántica
+    - Aplicaciones: Computación cuántica, láseres
+
+17. RELATIVIDAD
+    - Relatividad especial: Einstein 1905
+    - E=mc²: Equivalencia masa-energía
+    - Relatividad general: Gravedad como curvatura
+    - Agujeros negros: Singularidades
+    - Ondas gravitacionales: Ripples en espacio-tiempo
+
+18. FÍSICA NUCLEAR
+    - Estructura atómica: Núcleo y electrones
+    - Radiactividad: Desintegración nuclear
+    - Fisión: División de núcleos
+    - Fusión: Unión de núcleos (Sol)
+    - Aplicaciones: Energía, medicina, datación
+
+19. ASTROFÍSICA
+    - Estrellas: Formación, evolución, muerte
+    - Galaxias: Estructuras cósmicas
+    - Cosmología: Origen del universo
+    - Materia oscura y energía oscura
+    - Big Bang: Teoría del origen
+
+20. FÍSICA DE PARTÍCULAS
+    - Modelo estándar: Partículas fundamentales
+    - Quarks: Componentes de protones y neutrones
+    - Leptones: Electrones, neutrinos
+    - Bosones: Portadores de fuerza
+    - Aceleradores: LHC, colisionadores
+
+QUÍMICA:
+
+21. DEFINICIÓN Y ÁMBITO
+    - Estudio de materia y sus transformaciones
+    - Composición, estructura, propiedades
+    - Reacciones químicas
+    - Desde átomos hasta moléculas complejas
+
+22. ESTRUCTURA ATÓMICA
+    - Átomo: Protón, neutrón, electrón
+    - Número atómico: Protones
+    - Masa atómica: Protón + neutrón
+    - Isótopos: Mismo elemento, diferente masa
+    - Configuración electrónica: Distribución de electrones
+
+23. TABLA PERIÓDICA
+    - Elementos: Sustancias puras
+    - Períodos: Filas horizontales
+    - Grupos: Columnas verticales
+    - Propiedades periódicas: Tendencias
+    - Metales, no metales, metaloides
+
+24. ENLACES QUÍMICOS
+    - Enlace iónico: Transferencia de electrones
+    - Enlace covalente: Compartir electrones
+    - Enlace metálico: Electrones libres
+    - Fuerzas intermoleculares: Entre moléculas
+    - Geometría molecular: Forma de moléculas
+
+25. REACCIONES QUÍMICAS
+    - Reactivos y productos
+    - Balanceo de ecuaciones
+    - Tipos: Síntesis, descomposición, sustitución
+    - Velocidad de reacción: Factores que afectan
+    - Equilibrio químico: Estado balanceado
+
+26. ESTADOS DE LA MATERIA
+    - Sólido: Forma y volumen fijos
+    - Líquido: Forma variable, volumen fijo
+    - Gas: Forma y volumen variables
+    - Plasma: Estado ionizado
+    - Cambios de fase: Fusión, vaporización, sublimación
+
+27. ÁCIDOS Y BASES
+    - pH: Escala de acidez (0-14)
+    - Ácidos: Donan protones (H+)
+    - Bases: Aceptan protones
+    - Neutralización: Reacción ácido-base
+    - Indicadores: Cambio de color
+
+28. QUÍMICA ORGÁNICA
+    - Compuestos de carbono
+    - Hidrocarburos: Alcanos, alquenos, alquinos
+    - Grupos funcionales: Alcohol, ácido, éster
+    - Polímeros: Moléculas grandes
+    - Bioquímica: Química de la vida
+
+29. QUÍMICA INORGÁNICA
+    - Compuestos sin carbono (generalmente)
+    - Sales: Iónicos
+    - Óxidos: Con oxígeno
+    - Ácidos y bases inorgánicos
+    - Metales y no metales
+
+30. QUÍMICA ANALÍTICA
+    - Identificación de sustancias
+    - Cuantificación: Cuánto hay
+    - Técnicas: Espectroscopía, cromatografía
+    - Control de calidad
+    - Análisis ambiental
+
+APLICACIONES PRÁCTICAS:
+
+31. MEDICINA
+    - Farmacología: Medicamentos
+    - Diagnóstico: Pruebas médicas
+    - Tratamiento: Terapias
+    - Investigación: Nuevos tratamientos
+
+32. TECNOLOGÍA
+    - Materiales: Nuevos compuestos
+    - Electrónica: Semiconductores
+    - Energía: Baterías, células solares
+    - Nanotecnología: Escala molecular
+
+33. AMBIENTE
+    - Contaminación: Análisis y solución
+    - Cambio climático: Comprensión
+    - Energía renovable: Desarrollo
+    - Conservación: Protección
+
+34. INDUSTRIA
+    - Producción: Procesos químicos
+    - Calidad: Control y estándares
+    - Innovación: Nuevos productos
+    - Seguridad: Prevención de accidentes
+
+MÉTODO CIENTÍFICO:
+
+35. OBSERVACIÓN
+    - Notar fenómenos
+    - Preguntas
+    - Investigación previa
+
+36. HIPÓTESIS
+    - Explicación tentativa
+    - Predicciones
+    - Testable
+
+37. EXPERIMENTACIÓN
+    - Diseño de experimentos
+    - Variables: Independiente, dependiente, control
+    - Repetición: Validación
+    - Datos: Recopilación
+
+38. ANÁLISIS
+    - Interpretación de datos
+    - Gráficos y tablas
+    - Estadística
+    - Conclusiones
+
+39. COMUNICACIÓN
+    - Publicación: Compartir resultados
+    - Revisión: Por pares
+    - Reproducibilidad: Otros pueden verificar
+    - Aplicación: Uso práctico
+
+Las ciencias naturales proporcionan las herramientas para entender el mundo físico, desde las partículas subatómicas hasta los ecosistemas globales, permitiendo avances en medicina, tecnología y protección ambiental.
+
+
+
+
